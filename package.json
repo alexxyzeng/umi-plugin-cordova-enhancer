@@ -1,0 +1,36 @@
+{
+  "name": "umi-plugin-cordova-enhance",
+  "version": "0.0.1",
+  "description": "",
+  "authors": {
+    "name": "alexzeng",
+    "email": "xiayao.zeng@gmail.com"
+  },
+  "repository": "/umi-plugin-cordova-enhance",
+  "peerDependencies": {
+    "umi": "2.x || ^2.9.0-0"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "cross-env APP_ROOT=example umi dev",
+    "build": "father-build",
+    "prepublishOnly": "npm run build && np --no-cleanup --yolo --no-publish"
+  },
+  "devDependencies": {
+    "cross-env": "^6.0.3",
+    "father-build": "^1.8.0",
+    "np": "^5.0.3",
+    "umi": "^2.9.0",
+    "umi-types": ">= 0.4.0-beta.4"
+  },
+  "files": [
+    "lib",
+    "src",
+    "ui"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "xml-formatter": "^2.3.0",
+    "xml2json": "^0.12.0"
+  }
+}
