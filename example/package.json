@@ -7,12 +7,13 @@
   "scripts": {
     "mock:android": "umi build && umi cordova emulate android",
     "run:android": "umi build && umi cordova run android",
-    "release:android": "umi build && cordova build android --release",
-    "mock:ios": "umi build && umi cordova build ios && open -a Xcode ./platforms/ios/fmapp.xcworkspace",
+    "release:android": "umi build && umi cordova android --release",
+    "mock:ios": "umi build && cordova build ios && open -a Xcode ./platforms/ios/fmapp.xcworkspace",
     "init:android": "umi cordova add android --platform",
     "cordova:prepare": "umi cordova --prepare",
     "init:ios": "umi cordova add ios --platform",
-    "init:cordova": "umi cordova --init"
+    "init:cordova": "umi cordova --init",
+    "prepare:cordova": "umi cordova --prepare"
   },
   "cordova": {
     "platforms": [

@@ -15,6 +15,7 @@ import { stdout } from "process";
  * @param {*} options
  */
 export default function(api, options) {
+  // TODO: 修改默认配置
   api.registerCommand("cordova", args => {
     if (args.init) {
       return initCordova(options);
@@ -82,11 +83,14 @@ function releaseApp(args) {
 
 function releaseAndroidApp() {
   childProcess.execSync(`cordova build android --release`);
+  // TODO: 移动App到指定位置
 }
 
 function releaseiOSApp() {
   childProcess.execSync(`cordova build ios && fastlane beta`);
 }
+
+// TODO: 初始化iOS ci环境
 
 function updateConfig(options, baseConfigPath) {
   const { configPath, config, resPath } = options;
