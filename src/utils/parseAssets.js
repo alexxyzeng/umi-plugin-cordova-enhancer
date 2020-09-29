@@ -21,7 +21,7 @@ function parseIconsAndSplashes(basePath) {
 }
 
 function parseAndroidIcons(directory) {
-  const cwd = process.cwd();
+  const cwd = process.cwd() + "/";
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
@@ -38,7 +38,7 @@ function parseAndroidIcons(directory) {
 }
 
 function parseAndroidSplashes(directory) {
-  const cwd = process.cwd();
+  const cwd = process.cwd() + "/";
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
@@ -55,7 +55,7 @@ function parseAndroidSplashes(directory) {
 }
 
 function parseAppleIcons(directory) {
-  const cwd = process.cwd();
+  const cwd = process.cwd() + "/";
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
@@ -67,11 +67,6 @@ function parseAppleIcons(directory) {
       const parseRatio = ratio.slice(0, 1);
       const width = Number(parsedSize) * Number(parseRatio);
       const height = width;
-      console.log("====================================");
-      console.log(parsedSize, "---- size", typeof parsedSize);
-      console.log(parseRatio, "---- ratio", typeof parseRatio);
-      console.log(width, "---- width");
-      console.log("====================================");
       return {
         src: directory.replace(cwd, "") + "/" + file,
         width,
@@ -97,7 +92,7 @@ const splashDict = {
 };
 
 function parseAppleSplashes(directory) {
-  const cwd = process.cwd();
+  const cwd = process.cwd() + "/";
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
