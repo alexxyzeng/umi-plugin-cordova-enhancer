@@ -25,6 +25,9 @@ export default function(api, options) {
     if (args.platform) {
       return updateCordovaPlatform(args);
     }
+    if (args.release) {
+      return releaseAndroidApp(args);
+    }
     return updateCordovaPlugin(args);
   });
 }
@@ -54,7 +57,35 @@ function updateCordovaPlugin(args) {
 }
 
 function prepareCorodva() {
-  childProcess.execFileSync(`cordova prepare --color`);
+  childProcess.execSync(`cordova prepare --color`);
+}
+
+function runApp(args) {
+  const [action, platform] = args._ || [];
+  if (!action || !platform) {
+    return;
+  }
+  childProcess.execSync(`cordova ${action} ${platform}`);
+}
+
+function releaseApp(args) {
+  const [platform] = args._ || [];
+  if (!platform) {
+    return;
+  }
+  if (platform === "android") {
+    return releaseAndroidApp();
+  } else if (platform === "ios") {
+    releaseiOSApp();
+  }
+}
+
+function releaseAndroidApp() {
+  childProcess.execSync(`cordova build android --release`);
+}
+
+function releaseiOSApp() {
+  childProcess.execSync(`cordova build ios && fastlane beta`);
 }
 
 function updateConfig(options, baseConfigPath) {

@@ -2,6 +2,7 @@ import { join, resolve } from "path";
 
 export default {
   routes: [{ path: "/", component: "./index" }],
+  outputPath: "www",
   plugins: [
     [
       join(__dirname, "..", require("../package").main || "index.js"),
