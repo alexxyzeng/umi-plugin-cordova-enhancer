@@ -1,12 +1,22 @@
 {
   "dependencies": {
-    "cordova": "^10.0.0"
+    "cordova": "^10.0.0",
+    "cordova-plugin-device": "^2.0.3"
   },
   "scripts": {
-    "postinstall": "umi cordova_prepare",
     "mock:android": "umi build && cordova emulate android",
     "run:android": "umi build && cordova run android",
     "release:android": "umi build && cordova build android --release",
-    "mock:ios": "umi build && cordova build ios"
+    "mock:ios": "umi build && cordova build ios && open -a Xcode ./platforms/ios/fmapp.xcworkspace",
+    "init:android": "umi cordova add android --platform",
+    "cordova:prepare": "umi cordova --prepare",
+    "init:ios": "umi cordova add ios --platform",
+    "init:cordova": "umi cordova --init"
+  },
+  "cordova": {
+    "platforms": [],
+    "plugins": {
+      "cordova-plugin-device": {}
+    }
   }
 }

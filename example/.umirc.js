@@ -5,12 +5,13 @@ export default {
   plugins: [
     [
       join(__dirname, "..", require("../package").main || "index.js"),
+      // "umi-plugin-cordova-enhance",
       {
         configPath: resolve(__dirname, "config.xml"),
         resPath: __dirname + "/res",
         config: {
           id: "com.dfocus.fmapp",
-          version: "1.0.1",
+          version: "1.0.3",
           name: "fmapp",
           description: "fmapp",
           author: {
@@ -21,7 +22,7 @@ export default {
           permissions: [
             {
               type: "camera",
-              desc: "use camera"
+              desc: "我们要使用您的相机"
             },
             {
               type: "photo",

@@ -26,10 +26,11 @@ function addCordova() {
   if (!fs.existsSync(wwwPath)) {
     fs.mkdirSync(wwwPath);
   }
-  childProcess.spawnSync("yarn add cordova");
+  childProcess.execSync("yarn add cordova && cordova plugin save");
 }
 
-function updatePackageJson() {
+function updatePackageJson(options) {
+  const appName = options?.config?.name || "";
   const packageJsonPath = path.resolve(process.cwd(), "package.json");
   if (!packageJsonPath) {
     throw new Error("You have to init your project with package.json");
@@ -40,11 +41,17 @@ function updatePackageJson() {
   }
   const { scripts } = packageJson;
   const cordovaScripts = [
-    ["postinstall", "umi cordova_prepare"],
+    ["init:cordova", "umi cordova --init"],
+    ["init:android", "umi cordova add android --platform"],
+    ["cordova:prepare", "umi cordova --prepare"],
     ["mock:android", "umi build && cordova emulate android"],
     ["run:android", "umi build && cordova run android"],
     ["release:android", "umi build && cordova build android --release"],
-    ["mock:ios", "umi build && cordova build ios"]
+    ["init:ios", "umi cordova add ios --platform"],
+    [
+      "mock:ios",
+      `umi build && cordova build ios && open -a Xcode ./platforms/ios/${appName}.xcworkspace`
+    ]
   ];
   cordovaScripts.forEach(cordovaScript => {
     const [scriptName, scriptCommand] = cordovaScript;

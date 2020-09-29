@@ -28,7 +28,7 @@ function parseAndroidIcons(directory) {
       if (!/.(jpg|jpeg|png)$/.test(file)) {
         return null;
       }
-      const density = file.split("-")[2];
+      const density = file.split("-")[2].split(".")[0];
       return {
         density,
         src: directory.replace(cwd, "") + "/" + file

@@ -5,11 +5,10 @@ import format from "xml-formatter";
 import { parseIconsAndSplashes } from "./parseAssets";
 import { parsePermissions } from "./parsePermissions";
 
-function parseConfig(options, outputPath) {
-  const baseXml = fs.readFileSync(
-    path.resolve(__dirname, "..", "config-base.xml"),
-    "utf-8"
-  );
+function parseConfig(options, baseConfigPath) {
+  baseConfigPath =
+    baseConfigPath || path.resolve(__dirname, "..", "config-base.xml");
+  const baseXml = fs.readFileSync(baseConfigPath, "utf-8");
   const config = JSON.parse(parser.toJson(baseXml, { reversible: true }));
   const { widget } = config;
   const finalWidget = writePermissions(
@@ -17,7 +16,7 @@ function parseConfig(options, outputPath) {
     options
   );
   fs.writeFileSync(
-    outputPath || options.configPath,
+    options.configPath,
     format(parser.toXml({ ...config, widget: finalWidget }))
   );
 }
