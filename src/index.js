@@ -7,6 +7,7 @@ import {
   updatePackageJson,
   addCordova
 } from "./utils/initCordova";
+import { parseConfig } from "./utils/config";
 /**
  *
  * @param {IApi} api
@@ -24,5 +25,11 @@ export default function(api, options) {
     updateGitignore();
     addCordova();
     updatePackageJson();
+    updateConfig(options);
   });
+}
+
+function updateConfig(options) {
+  const { configPath, config, resPath } = options;
+  parseConfig({ ...config, configPath, resPath }, configPath);
 }

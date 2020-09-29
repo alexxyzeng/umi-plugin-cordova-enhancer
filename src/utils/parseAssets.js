@@ -2,9 +2,9 @@ const fs = require("fs");
 const path = require("path");
 const process = require("process");
 
-function parseIconsAndSplashes(basePath, type = "standard") {
-  const iconPath = path.resolve(basePath, `${type}/icon`);
-  const splashPath = path.resolve(basePath, `${type}/splash`);
+function parseIconsAndSplashes(basePath) {
+  const iconPath = path.resolve(basePath, `icon`);
+  const splashPath = path.resolve(basePath, `splash`);
   const android = {
     icons: parseAndroidIcons(path.join(iconPath, "/android")),
     splashes: parseAndroidSplashes(path.join(splashPath, "/android"))
@@ -21,6 +21,7 @@ function parseIconsAndSplashes(basePath, type = "standard") {
 }
 
 function parseAndroidIcons(directory) {
+  const cwd = process.cwd();
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
@@ -30,13 +31,14 @@ function parseAndroidIcons(directory) {
       const density = file.split("-")[2];
       return {
         density,
-        src: directory + "/" + file
+        src: directory.replace(cwd, "") + "/" + file
       };
     })
     .filter(item => item !== null);
 }
 
 function parseAndroidSplashes(directory) {
+  const cwd = process.cwd();
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
@@ -46,24 +48,32 @@ function parseAndroidSplashes(directory) {
       const [_, orientation, density] = file.split("-");
       return {
         density: `${orientation}-${density.split(".")[0]}`,
-        src: directory + "/" + file
+        src: directory.replace(cwd, "") + "/" + file
       };
     })
     .filter(item => item !== null);
 }
 
 function parseAppleIcons(directory) {
+  const cwd = process.cwd();
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
       if (!/.(jpg|jpeg|png)$/.test(file)) {
         return null;
       }
-      const [size, ratio] = file.split("-")[1].split("@");
-      const width = parseInt(size) * parseInt(ratio, 1);
+      const [size, ratio = "1"] = file.split("-")[1].split("@");
+      const parsedSize = size.replace(/.(jpg|jpeg|png)$/, "");
+      const parseRatio = ratio.slice(0, 1);
+      const width = Number(parsedSize) * Number(parseRatio);
       const height = width;
+      console.log("====================================");
+      console.log(parsedSize, "---- size", typeof parsedSize);
+      console.log(parseRatio, "---- ratio", typeof parseRatio);
+      console.log(width, "---- width");
+      console.log("====================================");
       return {
-        src: directory + +"/" + +file,
+        src: directory.replace(cwd, "") + "/" + file,
         width,
         height
       };
@@ -87,6 +97,7 @@ const splashDict = {
 };
 
 function parseAppleSplashes(directory) {
+  const cwd = process.cwd();
   const files = fs.readdirSync(directory, "utf-8");
   return files
     .map(file => {
@@ -98,7 +109,7 @@ function parseAppleSplashes(directory) {
         return null;
       }
       const { height, width } = splashDict[filename];
-      return { src: directory + "/" + file, height, width };
+      return { src: directory.replace(cwd, "") + "/" + file, height, width };
     })
     .filter(item => item !== null);
 }

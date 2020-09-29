@@ -1,5 +1,15 @@
+import fs from "fs";
+import path from "path";
+import parser from "xml2json";
+import format from "xml-formatter";
+import { parseIconsAndSplashes } from "./parseAssets";
+import { parsePermissions } from "./parsePermissions";
+
 function parseConfig(options, outputPath) {
-  const baseXml = fs.readFileSync(defaultOptions.baseConfigPath, "utf-8");
+  const baseXml = fs.readFileSync(
+    path.resolve(__dirname, "..", "config-base.xml"),
+    "utf-8"
+  );
   const config = JSON.parse(parser.toJson(baseXml, { reversible: true }));
   const { widget } = config;
   const finalWidget = writePermissions(
@@ -12,9 +22,9 @@ function parseConfig(options, outputPath) {
   );
 }
 
-function writeIconsAndSplashes(widget, { resPath, env }) {
+function writeIconsAndSplashes(widget, { resPath }) {
   const parsedPath = path.resolve(resPath);
-  const res = parseIconsAndSplashes(parsedPath, env);
+  const res = parseIconsAndSplashes(parsedPath);
   const { platform, ...restConfig } = widget;
   const { android: resAndroid, iOS: resApple } = res;
   const parsedPlatforms = [];
@@ -91,3 +101,5 @@ function writeInfos(widget, options) {
   };
   return finalWidget;
 }
+
+export { parseConfig };
