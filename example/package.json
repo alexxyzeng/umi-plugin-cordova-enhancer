@@ -2,7 +2,7 @@
   "dependencies": {
     "cordova": "^10.0.0"
   },
-  "script": {
+  "scripts": {
     "postinstall": "umi cordova_prepare",
     "mock:android": "umi build && cordova emulate android",
     "run:android": "umi build && cordova run android",
