@@ -9,14 +9,34 @@ import {
 } from "./utils/initCordova";
 import { parseConfig } from "./utils/config";
 import { stdout } from "process";
+import chalk from "chalk";
 /**
  *
  * @param {IApi} api
  * @param {*} options
  */
 export default function(api, options) {
+  api.modifyDefaultConfig(config => {
+    return {
+      ...config,
+      outputPath: "www"
+    };
+  });
   // TODO: 修改默认配置
   api.registerCommand("cordova", args => {
+    if (api.config.outputPath !== "www") {
+      console.log(
+        chalk.blue(
+          "To develop a cordova based app, you need to specify " +
+            chalk.green("outputPath") +
+            " to " +
+            chalk.yellow("www") +
+            " in the " +
+            chalk.underline.red("config.xml")
+        )
+      );
+      return;
+    }
     if (args.init) {
       return initCordova(options);
     }

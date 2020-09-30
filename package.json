@@ -30,6 +30,7 @@
   ],
   "license": "MIT",
   "dependencies": {
+    "chalk": "^4.1.0",
     "xml-formatter": "^2.3.0",
     "xml2json": "^0.12.0"
   }
