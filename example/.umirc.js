@@ -2,7 +2,7 @@ import { join, resolve } from "path";
 
 export default {
   routes: [{ path: "/", component: "./index" }],
-  outputPath: "dist",
+  outputPath: "www",
   plugins: [
     [
       join(__dirname, "..", require("../package").main || "index.js"),
@@ -38,7 +38,8 @@ export default {
               desc: "use microphone"
             }
           ]
-        }
+        },
+        apkOutputPath: __dirname + "/apk"
       }
     ]
   ]

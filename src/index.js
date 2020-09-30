@@ -22,7 +22,7 @@ export default function(api, options) {
       outputPath: "www"
     };
   });
-  // TODO: 修改默认配置
+
   api.registerCommand("cordova", args => {
     if (api.config.outputPath !== "www") {
       console.log(
@@ -47,7 +47,7 @@ export default function(api, options) {
       return updateCordovaPlatform(args);
     }
     if (args.release) {
-      return releaseAndroidApp(args);
+      return releaseApp(args, options);
     }
     return updateCordovaPlugin(args);
   });
@@ -60,10 +60,37 @@ function initCordova(options) {
   updateConfig(options);
 }
 
+import fs from "fs";
+
 function updateCordovaPlatform(args) {
+  const list = childProcess.execSync("cordova platform ls") + "";
+  const installedPlatforms = list.slice(0, list.indexOf("Available platforms"));
   // TODO: 在安装前检查对应的platform是否已存在
   const [action = "add", platform = "ios"] = args._ || [];
-  childProcess.execSync(`cordova platform ${action} ${platform}`);
+  if (action === "add" && installedPlatforms.includes(platform)) {
+    console.log(
+      "The platform " +
+        chalk.yellow(platform) +
+        " you want to add is already added"
+    );
+    return;
+  }
+  if (action === "remove" && !installedPlatforms.includes(platform)) {
+    console.log(
+      "The platform " +
+        chalk.yellow(platform) +
+        " you want to remove is not added"
+    );
+    return;
+  }
+  try {
+    childProcess.execSync(`cordova platform ${action} ${platform}`);
+    console.log(
+      "The platform " + chalk.yellow(platform) + " is successfully added"
+    );
+  } catch (err) {
+    console.log(chalk.bgCyan(err));
+  }
 }
 
 function updateCordovaPlugin(args) {
@@ -89,7 +116,7 @@ function runApp(args) {
   childProcess.execSync(`cordova ${action} ${platform}`);
 }
 
-function releaseApp(args) {
+function releaseApp(args, options) {
   const [platform] = args._ || [];
   if (!platform) {
     return;
@@ -97,11 +124,11 @@ function releaseApp(args) {
   if (platform === "android") {
     return releaseAndroidApp();
   } else if (platform === "ios") {
-    releaseiOSApp();
+    releaseiOSApp(options);
   }
 }
 
-function releaseAndroidApp() {
+function releaseAndroidApp(options) {
   childProcess.execSync(`cordova build android --release`);
   // TODO: 移动App到指定位置
 }
