@@ -2,6 +2,7 @@
 // - https://umijs.org/plugin/develop.html
 // import { IApi } from "umi-types";
 import childProcess from "child_process";
+import fs from "fs";
 import {
   updateGitignore,
   updatePackageJson,
@@ -10,12 +11,63 @@ import {
 import { parseConfig } from "./utils/config";
 import { stdout } from "process";
 import chalk from "chalk";
+
+const TAG = "org.alexzeng.umi-plugin-cordova-enhance";
+
+const commands = {
+  initCordova: (options, success, failure) =>
+    initCordova(options, success, failure),
+  addIOS: (_, success, failure) =>
+    updateCordovaPlatform(
+      { _: ["add", "ios"], platform: true },
+      success,
+      failure
+    ),
+  addAndroid: (_, success, failure) =>
+    updateCordovaPlatform(
+      { _: ["add", "android"], platform: true },
+      success,
+      failure
+    ),
+  removeIOS: (_, success, failure) =>
+    updateCordovaPlatform(
+      { _: ["remove", "ios"], platform: true },
+      success,
+      failure
+    ),
+  removeAndroid: (_, success, failure) =>
+    updateCordovaPlatform(
+      { _: ["remove", "android"], platform: true },
+      success,
+      failure
+    )
+};
+
 /**
  *
  * @param {IApi} api
  * @param {*} options
  */
 export default function(api, options) {
+  api.addUIPlugin(require.resolve("../dist/index.umd"));
+  api.onUISocket(({ action, failure, success }) => {
+    const { type } = action;
+    if (!type.startsWith(TAG)) {
+      failure({
+        message: "输入的指令不正确"
+      });
+      return;
+    }
+    const parsedAction = type.replace(`${TAG}.`, "");
+    const command = commands[parsedAction];
+    if (!command) {
+      failure({
+        message: "未找到对应的指令"
+      });
+    }
+    command(options, success, failure);
+  });
+
   api.modifyDefaultConfig(config => {
     return {
       ...config,
@@ -53,16 +105,18 @@ export default function(api, options) {
   });
 }
 
-function initCordova(options) {
+function initCordova(options, success) {
+  updateConfig(options);
   addCordova();
   updateGitignore();
   updatePackageJson(options);
-  updateConfig(options);
+  success &&
+    success({
+      data: "初始化Cordova成功"
+    });
 }
 
-import fs from "fs";
-
-function updateCordovaPlatform(args) {
+function updateCordovaPlatform(args, success, failure) {
   const list = childProcess.execSync("cordova platform ls") + "";
   const installedPlatforms = list.slice(0, list.indexOf("Available platforms"));
   // TODO: 在安装前检查对应的platform是否已存在
@@ -73,6 +127,10 @@ function updateCordovaPlatform(args) {
         chalk.yellow(platform) +
         " you want to add is already added"
     );
+    failure &&
+      failure({
+        message: `要添加的platform: ${platform}, 已存在`
+      });
     return;
   }
   if (action === "remove" && !installedPlatforms.includes(platform)) {
@@ -81,6 +139,10 @@ function updateCordovaPlatform(args) {
         chalk.yellow(platform) +
         " you want to remove is not added"
     );
+    failure &&
+      failure({
+        message: `要移除的platform: ${platform}不存在`
+      });
     return;
   }
   try {
@@ -88,24 +150,44 @@ function updateCordovaPlatform(args) {
     console.log(
       "The platform " + chalk.yellow(platform) + " is successfully added"
     );
+    success &&
+      success({
+        data: `更新platform: ${platform}成功`
+      });
   } catch (err) {
     console.log(chalk.bgCyan(err));
+    failure &&
+      failure({
+        message: `更新platform: ${platform}失败, 错误信息为: ${err?.message}`
+      });
   }
 }
 
-function updateCordovaPlugin(args) {
+function updateCordovaPlugin(args, success, failure) {
   const [action, plugin] = args._ || [];
   if (!action || !plugin) {
     // TODO: 错误提示
+    failure &&
+      failure({
+        message: `未指定add/remove或者plugin名称, 当前操作为${action}, 当前plugin名称为${plugin}`
+      });
     return;
   }
   childProcess.execSync(
     `cordova plugin ${action} ${plugin} && cordova plugin save`
   );
+  success &&
+    success({
+      data: `更新插件${plugin}成功`
+    });
 }
 
-function prepareCorodva() {
+function prepareCorodva(args, success, failure) {
   childProcess.execSync(`cordova prepare --color`);
+  success &&
+    success({
+      data: "恢复Cordova信息成功"
+    });
 }
 
 function runApp(args) {

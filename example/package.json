@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "cordova": "^10.0.0",
+    "cordova-android": "^8.1.0",
     "cordova-plugin-device": "^2.0.3"
   },
   "scripts": {
@@ -15,12 +16,12 @@
     "prepare:cordova": "umi cordova --prepare"
   },
   "cordova": {
-    "platforms": [],
+    "platforms": [
+      "android"
+    ],
     "plugins": {
       "cordova-plugin-device": {}
     }
   },
-  "devDependencies": {
-    "cordova-ios": "^5.1.1"
-  }
+  "devDependencies": {}
 }

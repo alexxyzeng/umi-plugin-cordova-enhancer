@@ -26,7 +26,7 @@ function addCordova() {
   if (!fs.existsSync(wwwPath)) {
     fs.mkdirSync(wwwPath);
   }
-  childProcess.execSync("yarn add cordova && cordova plugin save");
+  childProcess.execSync("yarn add cordova");
 }
 
 function updatePackageJson(options) {

@@ -77,7 +77,7 @@
         <splash src="res/splash/ios/Default~iphone.png" height="480" width="320"></splash>
         <config-file parent="NSMicrophoneUsageDescription " platform="ios" target="*-Info.plist">
             <string>
-                我们要使用您的相机
+                xxxx我们要使用您的相机
             </string>
         </config-file>
         <config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">

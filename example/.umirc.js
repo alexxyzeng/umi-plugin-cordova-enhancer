@@ -23,7 +23,7 @@ export default {
           permissions: [
             {
               type: "camera",
-              desc: "我们要使用您的相机"
+              desc: "xxxx我们要使用您的相机"
             },
             {
               type: "photo",
