@@ -99,6 +99,61 @@
   }
 
   var TAG = "org.alexzeng.umi-plugin-cordova-enhance";
+
+  function CordovaStatusPanel(_ref) {
+    var api = _ref.api;
+
+    var _useState = React.useState(""),
+        _useState2 = _slicedToArray(_useState, 2),
+        platforms = _useState2[0],
+        setPlatforms = _useState2[1];
+
+    var _useState3 = React.useState(""),
+        _useState4 = _slicedToArray(_useState3, 2),
+        plugins = _useState4[0],
+        setPlugins = _useState4[1];
+
+    React.useEffect(function () {
+      var getInfo = /*#__PURE__*/function () {
+        var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+          var _yield$api$callRemote, data, platforms, plugins;
+
+          return regeneratorRuntime.wrap(function _callee$(_context) {
+            while (1) {
+              switch (_context.prev = _context.next) {
+                case 0:
+                  _context.next = 2;
+                  return api.callRemote({
+                    type: "".concat(TAG, ".getCordovaInfo")
+                  });
+
+                case 2:
+                  _yield$api$callRemote = _context.sent;
+                  data = _yield$api$callRemote.data;
+                  platforms = data.platforms, plugins = data.plugins;
+                  setPlatforms(platforms);
+                  setPlugins(plugins);
+
+                case 7:
+                case "end":
+                  return _context.stop();
+              }
+            }
+          }, _callee);
+        }));
+
+        return function getInfo() {
+          return _ref2.apply(this, arguments);
+        };
+      }();
+
+      getInfo();
+    });
+    return /*#__PURE__*/React__default.createElement(antd.Card, {
+      title: "Cordova\u72B6\u6001"
+    }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, platforms)), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, plugins)));
+  }
+
   var index = (function (api) {
     function CommandPanel() {
       return /*#__PURE__*/React__default.createElement(antd.Card, {
@@ -174,7 +229,7 @@
           }, _callee2, null, [[0, 8]]);
         }))
       }, "\u914D\u7F6EiOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-        span: 2
+        span: 3
       }, /*#__PURE__*/React__default.createElement(antd.Button, {
         type: "ghost",
         onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
@@ -286,58 +341,6 @@
       }, "\u79FB\u9664Android\u5E73\u53F0"))));
     }
 
-    function CordovaStatusPanel() {
-      var _useState = React.useState(""),
-          _useState2 = _slicedToArray(_useState, 2),
-          platforms = _useState2[0],
-          setPlatforms = _useState2[1];
-
-      var _useState3 = React.useState(""),
-          _useState4 = _slicedToArray(_useState3, 2),
-          plugins = _useState4[0],
-          setPlugins = _useState4[1];
-
-      React.useEffect(function () {
-        var getInfo = /*#__PURE__*/function () {
-          var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-            var _yield$api$callRemote6, data, platforms, plugins;
-
-            return regeneratorRuntime.wrap(function _callee6$(_context6) {
-              while (1) {
-                switch (_context6.prev = _context6.next) {
-                  case 0:
-                    _context6.next = 2;
-                    return api.callRemote({
-                      type: "".concat(TAG, ".getCordovaInfo")
-                    });
-
-                  case 2:
-                    _yield$api$callRemote6 = _context6.sent;
-                    data = _yield$api$callRemote6.data;
-                    platforms = data.platforms, plugins = data.plugins;
-                    setPlatforms(platforms);
-                    setPlugins(plugins);
-
-                  case 7:
-                  case "end":
-                    return _context6.stop();
-                }
-              }
-            }, _callee6);
-          }));
-
-          return function getInfo() {
-            return _ref6.apply(this, arguments);
-          };
-        }();
-
-        getInfo();
-      });
-      return /*#__PURE__*/React__default.createElement(antd.Card, {
-        title: "Cordova\u72B6\u6001"
-      }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, platforms)), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, plugins)));
-    }
-
     api.addPanel({
       title: "Cordova相关命令",
       path: "/cordova-commands",
@@ -348,7 +351,11 @@
       title: "Cordova相关状态",
       path: "/cordova-info",
       icon: "home",
-      component: CordovaStatusPanel
+      component: function component() {
+        return /*#__PURE__*/React__default.createElement(CordovaStatusPanel, {
+          api: api
+        });
+      }
     });
   });
 
