@@ -154,198 +154,298 @@
     }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, platforms)), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, plugins)));
   }
 
+  function CordovaCommandPanel() {
+    return /*#__PURE__*/React__default.createElement(antd.Card, {
+      title: "Cordova\u76F8\u5173\u914D\u7F6E\u547D\u4EE4"
+    }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5B89\u88C5")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var _yield$api$callRemote, data;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.prev = 0;
+                _context.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".initCordova")
+                });
+
+              case 3:
+                _yield$api$callRemote = _context.sent;
+                data = _yield$api$callRemote.data;
+                antd.message.success(data);
+                _context.next = 11;
+                break;
+
+              case 8:
+                _context.prev = 8;
+                _context.t0 = _context["catch"](0);
+                antd.message.error(_context.t0.message);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[0, 8]]);
+      }))
+    }, "\u521D\u59CB\u5316Cordova\u73AF\u5883")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "\u914D\u7F6EApp\u5E73\u53F0\u4FE1\u606F")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var _yield$api$callRemote2, data;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.prev = 0;
+                _context2.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".addIOS")
+                });
+
+              case 3:
+                _yield$api$callRemote2 = _context2.sent;
+                data = _yield$api$callRemote2.data;
+                antd.message.success(data);
+                _context2.next = 11;
+                break;
+
+              case 8:
+                _context2.prev = 8;
+                _context2.t0 = _context2["catch"](0);
+                antd.message.error(_context2.t0.message);
+
+              case 11:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[0, 8]]);
+      }))
+    }, "\u914D\u7F6EiOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "ghost",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+        var _yield$api$callRemote3, data;
+
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.prev = 0;
+                _context3.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".removeIOS")
+                });
+
+              case 3:
+                _yield$api$callRemote3 = _context3.sent;
+                data = _yield$api$callRemote3.data;
+                antd.message.success(data);
+                _context3.next = 11;
+                break;
+
+              case 8:
+                _context3.prev = 8;
+                _context3.t0 = _context3["catch"](0);
+                antd.message.error(_context3.t0.message);
+
+              case 11:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[0, 8]]);
+      }))
+    }, "\u79FB\u9664iOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3,
+      push: 2
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+        var _yield$api$callRemote4, data;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                _context4.prev = 0;
+                _context4.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".addAndroid")
+                });
+
+              case 3:
+                _yield$api$callRemote4 = _context4.sent;
+                data = _yield$api$callRemote4.data;
+                antd.message.success(data);
+                _context4.next = 11;
+                break;
+
+              case 8:
+                _context4.prev = 8;
+                _context4.t0 = _context4["catch"](0);
+                antd.message.error(_context4.t0.message);
+
+              case 11:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[0, 8]]);
+      }))
+    }, "\u914D\u7F6EAndroid\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3,
+      push: 2
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "ghost",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+        var _yield$api$callRemote5, data;
+
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                _context5.prev = 0;
+                _context5.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".removeAndroid")
+                });
+
+              case 3:
+                _yield$api$callRemote5 = _context5.sent;
+                data = _yield$api$callRemote5.data;
+                antd.message.success(data);
+                _context5.next = 11;
+                break;
+
+              case 8:
+                _context5.prev = 8;
+                _context5.t0 = _context5["catch"](0);
+                antd.message.error(_context5.t0.message);
+
+              case 11:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[0, 8]]);
+      }))
+    }, "\u79FB\u9664Android\u5E73\u53F0"))));
+  }
+
+  function Configuration(_ref) {
+    var api = _ref.api;
+
+    var _Form$useForm = antd.Form.useForm(),
+        _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
+        form = _Form$useForm2[0];
+
+    var TwoColumnPanel = api.TwoColumnPanel,
+        Field = api.Field;
+    return /*#__PURE__*/React__default.createElement(antd.Card, {
+      title: "\u914D\u7F6EConfig.xml",
+      style: {
+        overflowY: "scroll"
+      }
+    }, /*#__PURE__*/React__default.createElement("div", {
+      style: {
+        overflowY: "scroll",
+        maxHeight: 1000
+      }
+    }, /*#__PURE__*/React__default.createElement(antd.Form, {
+      form: form,
+      onFinish: function onFinish(values) {
+        console.log("values ----", values);
+      }
+    }, /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "id",
+      label: "App Id",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "version",
+      label: "App \u7248\u672C\u53F7",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "name",
+      label: "App \u540D\u79F0",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "allow-intent",
+      label: "allow-intent",
+      type: "string[]"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "author.email",
+      label: "\u4F5C\u8005\u90AE\u7BB1",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "author.href",
+      label: "\u4F5C\u8005\u76F8\u5173\u94FE\u63A5",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "author.name",
+      label: "\u4F5C\u8005\u540D\u79F0",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "allow-navigation",
+      label: "allow-navigation",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "preference.Orientation",
+      label: "Orientation",
+      type: "list",
+      options: ["default", "landscape", "portrait"]
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "preference.target-device",
+      label: "\u8BBE\u5907\u7C7B\u578B",
+      type: "list",
+      options: ["universal", "handset", "tablet"]
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "preference.FullScreen",
+      label: "\u662F\u5426\u5168\u5C4F",
+      type: "boolean"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "other",
+      label: "\u5176\u4ED6\u914D\u7F6E",
+      type: "any"
+    }), /*#__PURE__*/React__default.createElement(antd.Form.Item, {
+      shouldUpdate: true
+    }, function (_ref2) {
+      var getFieldsValue = _ref2.getFieldsValue;
+      return /*#__PURE__*/React__default.createElement("pre", null, JSON.stringify(getFieldsValue(), null, 2));
+    }), /*#__PURE__*/React__default.createElement(antd.Button, {
+      htmlType: "submit"
+    }, "Submit"))));
+  }
+
   var index = (function (api) {
-    function CommandPanel() {
-      return /*#__PURE__*/React__default.createElement(antd.Card, {
-        title: "Cordova\u76F8\u5173\u914D\u7F6E\u547D\u4EE4"
-      }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5B89\u88C5")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
-        type: "primary",
-        onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-          var _yield$api$callRemote, data;
-
-          return regeneratorRuntime.wrap(function _callee$(_context) {
-            while (1) {
-              switch (_context.prev = _context.next) {
-                case 0:
-                  _context.prev = 0;
-                  _context.next = 3;
-                  return api.callRemote({
-                    type: "".concat(TAG, ".initCordova")
-                  });
-
-                case 3:
-                  _yield$api$callRemote = _context.sent;
-                  data = _yield$api$callRemote.data;
-                  antd.message.success(data);
-                  _context.next = 11;
-                  break;
-
-                case 8:
-                  _context.prev = 8;
-                  _context.t0 = _context["catch"](0);
-                  antd.message.error(_context.t0.message);
-
-                case 11:
-                case "end":
-                  return _context.stop();
-              }
-            }
-          }, _callee, null, [[0, 8]]);
-        }))
-      }, "\u521D\u59CB\u5316Cordova\u73AF\u5883")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "\u914D\u7F6EApp\u5E73\u53F0\u4FE1\u606F")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
-        span: 2
-      }, /*#__PURE__*/React__default.createElement(antd.Button, {
-        type: "primary",
-        onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
-          var _yield$api$callRemote2, data;
-
-          return regeneratorRuntime.wrap(function _callee2$(_context2) {
-            while (1) {
-              switch (_context2.prev = _context2.next) {
-                case 0:
-                  _context2.prev = 0;
-                  _context2.next = 3;
-                  return api.callRemote({
-                    type: "".concat(TAG, ".addIOS")
-                  });
-
-                case 3:
-                  _yield$api$callRemote2 = _context2.sent;
-                  data = _yield$api$callRemote2.data;
-                  antd.message.success(data);
-                  _context2.next = 11;
-                  break;
-
-                case 8:
-                  _context2.prev = 8;
-                  _context2.t0 = _context2["catch"](0);
-                  antd.message.error(_context2.t0.message);
-
-                case 11:
-                case "end":
-                  return _context2.stop();
-              }
-            }
-          }, _callee2, null, [[0, 8]]);
-        }))
-      }, "\u914D\u7F6EiOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-        span: 3
-      }, /*#__PURE__*/React__default.createElement(antd.Button, {
-        type: "ghost",
-        onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
-          var _yield$api$callRemote3, data;
-
-          return regeneratorRuntime.wrap(function _callee3$(_context3) {
-            while (1) {
-              switch (_context3.prev = _context3.next) {
-                case 0:
-                  _context3.prev = 0;
-                  _context3.next = 3;
-                  return api.callRemote({
-                    type: "".concat(TAG, ".removeIOS")
-                  });
-
-                case 3:
-                  _yield$api$callRemote3 = _context3.sent;
-                  data = _yield$api$callRemote3.data;
-                  antd.message.success(data);
-                  _context3.next = 11;
-                  break;
-
-                case 8:
-                  _context3.prev = 8;
-                  _context3.t0 = _context3["catch"](0);
-                  antd.message.error(_context3.t0.message);
-
-                case 11:
-                case "end":
-                  return _context3.stop();
-              }
-            }
-          }, _callee3, null, [[0, 8]]);
-        }))
-      }, "\u79FB\u9664iOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-        span: 3,
-        push: 2
-      }, /*#__PURE__*/React__default.createElement(antd.Button, {
-        type: "primary",
-        onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
-          var _yield$api$callRemote4, data;
-
-          return regeneratorRuntime.wrap(function _callee4$(_context4) {
-            while (1) {
-              switch (_context4.prev = _context4.next) {
-                case 0:
-                  _context4.prev = 0;
-                  _context4.next = 3;
-                  return api.callRemote({
-                    type: "".concat(TAG, ".addAndroid")
-                  });
-
-                case 3:
-                  _yield$api$callRemote4 = _context4.sent;
-                  data = _yield$api$callRemote4.data;
-                  antd.message.success(data);
-                  _context4.next = 11;
-                  break;
-
-                case 8:
-                  _context4.prev = 8;
-                  _context4.t0 = _context4["catch"](0);
-                  antd.message.error(_context4.t0.message);
-
-                case 11:
-                case "end":
-                  return _context4.stop();
-              }
-            }
-          }, _callee4, null, [[0, 8]]);
-        }))
-      }, "\u914D\u7F6EAndroid\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-        span: 3,
-        push: 2
-      }, /*#__PURE__*/React__default.createElement(antd.Button, {
-        type: "ghost",
-        onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
-          var _yield$api$callRemote5, data;
-
-          return regeneratorRuntime.wrap(function _callee5$(_context5) {
-            while (1) {
-              switch (_context5.prev = _context5.next) {
-                case 0:
-                  _context5.prev = 0;
-                  _context5.next = 3;
-                  return api.callRemote({
-                    type: "".concat(TAG, ".removeAndroid")
-                  });
-
-                case 3:
-                  _yield$api$callRemote5 = _context5.sent;
-                  data = _yield$api$callRemote5.data;
-                  antd.message.success(data);
-                  _context5.next = 11;
-                  break;
-
-                case 8:
-                  _context5.prev = 8;
-                  _context5.t0 = _context5["catch"](0);
-                  antd.message.error(_context5.t0.message);
-
-                case 11:
-                case "end":
-                  return _context5.stop();
-              }
-            }
-          }, _callee5, null, [[0, 8]]);
-        }))
-      }, "\u79FB\u9664Android\u5E73\u53F0"))));
-    }
-
     api.addPanel({
       title: "Cordova相关命令",
       path: "/cordova-commands",
       icon: "home",
-      component: CommandPanel
+      component: function component() {
+        return /*#__PURE__*/React__default.createElement(CordovaCommandPanel, {
+          api: api
+        });
+      }
     });
     api.addPanel({
       title: "Cordova相关状态",
@@ -353,6 +453,15 @@
       icon: "home",
       component: function component() {
         return /*#__PURE__*/React__default.createElement(CordovaStatusPanel, {
+          api: api
+        });
+      }
+    });
+    api.addPanel({
+      title: "Cordova配置",
+      path: "/cordova-config",
+      component: function component() {
+        return /*#__PURE__*/React__default.createElement(Configuration, {
           api: api
         });
       }
