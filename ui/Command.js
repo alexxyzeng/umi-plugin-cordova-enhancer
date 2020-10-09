@@ -3,7 +3,7 @@ import { Button, Card, Col, message, Row } from "antd";
 import CordovaStatusPanel from "./Status";
 
 import { TAG } from "./const";
-function CordovaCommandPanel() {
+function CordovaCommandPanel({ api }) {
   return (
     <Card title="Cordova相关配置命令">
       <Row>
@@ -97,6 +97,100 @@ function CordovaCommandPanel() {
             }}
           >
             移除Android平台
+          </Button>
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <h3>Cordova其他命令</h3>
+      </Row>
+      <Row>
+        <Col span={3}>
+          <Button
+            type="ghost"
+            onClick={async () => {
+              try {
+                const { data } = await api.callRemote({
+                  type: `${TAG}.debugIOS`
+                });
+                message.success(data);
+              } catch (err) {
+                message.error(err.message);
+              }
+            }}
+          >
+            调试iOS
+          </Button>
+        </Col>
+        <Col span={3}>
+          <Button
+            type="ghost"
+            onClick={async () => {
+              try {
+                const { data } = await api.callRemote({
+                  type: `${TAG}.debugAndroid`
+                });
+                message.success(data);
+              } catch (err) {
+                message.error(err.message);
+              }
+            }}
+          >
+            调试Android
+          </Button>
+        </Col>
+        <Col span={3}>
+          <Button
+            type="primary"
+            onClick={async () => {
+              try {
+                const { data } = await api.callRemote({
+                  type: `${TAG}.runRealAndroid`
+                });
+                message.success(data);
+              } catch (err) {
+                message.error(err.message);
+              }
+            }}
+          >
+            运行Android
+          </Button>
+        </Col>
+      </Row>
+      <br />
+      <Row>
+        <Col span={3}>
+          <Button
+            type="primary"
+            onClick={async () => {
+              try {
+                const { data } = await api.callRemote({
+                  type: `${TAG}.releaseIOS`
+                });
+                message.success(data);
+              } catch (err) {
+                message.error(err.message);
+              }
+            }}
+          >
+            发布iOS
+          </Button>
+        </Col>
+        <Col span={3}>
+          <Button
+            type="primary"
+            onClick={async () => {
+              try {
+                const { data } = await api.callRemote({
+                  type: `${TAG}.releaseAndroid`
+                });
+                message.success(data);
+              } catch (err) {
+                message.error(err.message);
+              }
+            }}
+          >
+            发布Android
           </Button>
         </Col>
       </Row>

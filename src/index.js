@@ -43,6 +43,25 @@ const commands = {
     ),
   getCordovaInfo: (_, success, failure) => {
     getCordovaDetails(_, success, failure);
+  },
+  debugIOS: (_, success, failure) => {
+    runAppInUI("mock:ios", success, failure);
+  },
+  debugAndroid: (_, success, failure) => {
+    runAppInUI("mock:android", success, failure);
+  },
+  runRealAndroid: (_, success, failure) => {
+    runAppInUI("run:android", success, failure);
+  },
+  releaseIOS: (_, success, failure) => {
+    failure({
+      message: "当前功能未实现"
+    });
+  },
+  releaseAndroid: () => {
+    failure({
+      message: "当前功能未实现"
+    });
   }
 };
 
@@ -104,7 +123,10 @@ export default function(api, options) {
     if (args.release) {
       return releaseApp(args, options);
     }
-    return updateCordovaPlugin(args);
+    if (args.plugin) {
+      return updateCordovaPlugin(args);
+    }
+    return runApp(args);
   });
 }
 
@@ -201,25 +223,42 @@ function runApp(args) {
   childProcess.execSync(`cordova ${action} ${platform}`);
 }
 
+function runAppInUI(args, success, failure) {
+  childProcess.execSync(`yarn ${args}`);
+  success &&
+    success({
+      data: "启动成功"
+    });
+}
+
 function releaseApp(args, options) {
   const [platform] = args._ || [];
   if (!platform) {
     return;
   }
   if (platform === "android") {
-    return releaseAndroidApp();
+    return releaseAndroidApp(options);
   } else if (platform === "ios") {
     releaseiOSApp(options);
   }
 }
 
-function releaseAndroidApp(options) {
+function releaseAndroidApp(options, success, failure) {
   childProcess.execSync(`cordova build android --release`);
   // TODO: 移动App到指定位置
   const { apkOutputPath } = options;
+  if (!apkOutputPath) {
+    return;
+  }
+  if (!fs.existsSync(apkOutputPath)) {
+    fs.mkdirSync(apkOutputPath);
+  }
+  childProcess.execSync(
+    `cp platforms/android/app/build/outputs/apk/release/app-release*.apk ${apkOutputPath}/app-release.apk`
+  );
 }
 
-function releaseiOSApp() {
+function releaseiOSApp(_, success, failure) {
   childProcess.execSync(`cordova build ios && fastlane beta`);
 }
 

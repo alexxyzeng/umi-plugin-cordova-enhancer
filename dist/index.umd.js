@@ -154,7 +154,8 @@
     }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, platforms)), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, plugins)));
   }
 
-  function CordovaCommandPanel() {
+  function CordovaCommandPanel(_ref) {
+    var api = _ref.api;
     return /*#__PURE__*/React__default.createElement(antd.Card, {
       title: "Cordova\u76F8\u5173\u914D\u7F6E\u547D\u4EE4"
     }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5B89\u88C5")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
@@ -337,7 +338,187 @@
           }
         }, _callee5, null, [[0, 8]]);
       }))
-    }, "\u79FB\u9664Android\u5E73\u53F0"))));
+    }, "\u79FB\u9664Android\u5E73\u53F0"))), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5176\u4ED6\u547D\u4EE4")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "ghost",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+        var _yield$api$callRemote6, data;
+
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                _context6.prev = 0;
+                _context6.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".debugIOS")
+                });
+
+              case 3:
+                _yield$api$callRemote6 = _context6.sent;
+                data = _yield$api$callRemote6.data;
+                antd.message.success(data);
+                _context6.next = 11;
+                break;
+
+              case 8:
+                _context6.prev = 8;
+                _context6.t0 = _context6["catch"](0);
+                antd.message.error(_context6.t0.message);
+
+              case 11:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, null, [[0, 8]]);
+      }))
+    }, "\u8C03\u8BD5iOS")), /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "ghost",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+        var _yield$api$callRemote7, data;
+
+        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                _context7.prev = 0;
+                _context7.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".debugAndroid")
+                });
+
+              case 3:
+                _yield$api$callRemote7 = _context7.sent;
+                data = _yield$api$callRemote7.data;
+                antd.message.success(data);
+                _context7.next = 11;
+                break;
+
+              case 8:
+                _context7.prev = 8;
+                _context7.t0 = _context7["catch"](0);
+                antd.message.error(_context7.t0.message);
+
+              case 11:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, null, [[0, 8]]);
+      }))
+    }, "\u8C03\u8BD5Android")), /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
+        var _yield$api$callRemote8, data;
+
+        return regeneratorRuntime.wrap(function _callee8$(_context8) {
+          while (1) {
+            switch (_context8.prev = _context8.next) {
+              case 0:
+                _context8.prev = 0;
+                _context8.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".runRealAndroid")
+                });
+
+              case 3:
+                _yield$api$callRemote8 = _context8.sent;
+                data = _yield$api$callRemote8.data;
+                antd.message.success(data);
+                _context8.next = 11;
+                break;
+
+              case 8:
+                _context8.prev = 8;
+                _context8.t0 = _context8["catch"](0);
+                antd.message.error(_context8.t0.message);
+
+              case 11:
+              case "end":
+                return _context8.stop();
+            }
+          }
+        }, _callee8, null, [[0, 8]]);
+      }))
+    }, "\u8FD0\u884CAndroid"))), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
+        var _yield$api$callRemote9, data;
+
+        return regeneratorRuntime.wrap(function _callee9$(_context9) {
+          while (1) {
+            switch (_context9.prev = _context9.next) {
+              case 0:
+                _context9.prev = 0;
+                _context9.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".releaseIOS")
+                });
+
+              case 3:
+                _yield$api$callRemote9 = _context9.sent;
+                data = _yield$api$callRemote9.data;
+                antd.message.success(data);
+                _context9.next = 11;
+                break;
+
+              case 8:
+                _context9.prev = 8;
+                _context9.t0 = _context9["catch"](0);
+                antd.message.error(_context9.t0.message);
+
+              case 11:
+              case "end":
+                return _context9.stop();
+            }
+          }
+        }, _callee9, null, [[0, 8]]);
+      }))
+    }, "\u53D1\u5E03iOS")), /*#__PURE__*/React__default.createElement(antd.Col, {
+      span: 3
+    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
+      onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
+        var _yield$api$callRemote10, data;
+
+        return regeneratorRuntime.wrap(function _callee10$(_context10) {
+          while (1) {
+            switch (_context10.prev = _context10.next) {
+              case 0:
+                _context10.prev = 0;
+                _context10.next = 3;
+                return api.callRemote({
+                  type: "".concat(TAG, ".releaseAndroid")
+                });
+
+              case 3:
+                _yield$api$callRemote10 = _context10.sent;
+                data = _yield$api$callRemote10.data;
+                antd.message.success(data);
+                _context10.next = 11;
+                break;
+
+              case 8:
+                _context10.prev = 8;
+                _context10.t0 = _context10["catch"](0);
+                antd.message.error(_context10.t0.message);
+
+              case 11:
+              case "end":
+                return _context10.stop();
+            }
+          }
+        }, _callee10, null, [[0, 8]]);
+      }))
+    }, "\u53D1\u5E03Android"))));
   }
 
   function Configuration(_ref) {
