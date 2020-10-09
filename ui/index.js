@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Button, Card, Col, message, Row } from "antd";
 const TAG = "org.alexzeng.umi-plugin-cordova-enhance";
 
@@ -6,7 +7,7 @@ export default api => {
     return (
       <Card title="Cordova相关配置命令">
         <Row>
-          <h2>Cordova安装</h2>
+          <h3>Cordova安装</h3>
         </Row>
         <Row>
           <Button
@@ -27,7 +28,7 @@ export default api => {
         </Row>
         <br />
         <Row>
-          <h2>配置App平台信息</h2>
+          <h3>配置App平台信息</h3>
         </Row>
         <Row>
           <Col span={2}>
@@ -103,10 +104,50 @@ export default api => {
     );
   }
 
+  function CordovaStatusPanel() {
+    const [platforms, setPlatforms] = useState("");
+    const [plugins, setPlugins] = useState("");
+    useEffect(() => {
+      const getInfo = async function() {
+        const { data } = await api.callRemote({
+          type: `${TAG}.getCordovaInfo`
+        });
+        const { platforms, plugins } = data;
+        setPlatforms(platforms);
+        setPlugins(plugins);
+      };
+      getInfo();
+    });
+    return (
+      <Card title="Cordova状态">
+        <Row>
+          <h3>Cordova平台状态</h3>
+        </Row>
+        <Row>
+          <div>{platforms}</div>
+        </Row>
+        <br />
+        <Row>
+          <h3>Cordova插件状态</h3>
+        </Row>
+        <Row>
+          <div>{plugins}</div>
+        </Row>
+      </Card>
+    );
+  }
+
   api.addPanel({
     title: "Cordova相关命令",
     path: "/cordova-commands",
     icon: "home",
     component: CommandPanel
+  });
+
+  api.addPanel({
+    title: "Cordova相关状态",
+    path: "/cordova-info",
+    icon: "home",
+    component: CordovaStatusPanel
   });
 };

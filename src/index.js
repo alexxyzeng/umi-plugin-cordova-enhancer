@@ -40,7 +40,10 @@ const commands = {
       { _: ["remove", "android"], platform: true },
       success,
       failure
-    )
+    ),
+  getCordovaInfo: (_, success, failure) => {
+    getCordovaDetails(_, success, failure);
+  }
 };
 
 /**
@@ -213,10 +216,27 @@ function releaseApp(args, options) {
 function releaseAndroidApp(options) {
   childProcess.execSync(`cordova build android --release`);
   // TODO: 移动App到指定位置
+  const { apkOutputPath } = options;
 }
 
 function releaseiOSApp() {
   childProcess.execSync(`cordova build ios && fastlane beta`);
+}
+
+function getCordovaDetails(_, success, failure) {
+  const platforms = childProcess.execSync("cordova platform ls") + "";
+  const installedPlatforms = platforms
+    .slice(0, platforms.indexOf("Available platforms"))
+    .replace("Installed platforms:", "")
+    .split("\n");
+  const plugins = childProcess.execSync("cordova plugin ls") + "";
+  success &&
+    success({
+      data: {
+        platforms: installedPlatforms,
+        plugins
+      }
+    });
 }
 
 // TODO: 初始化iOS ci环境

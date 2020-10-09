@@ -4,7 +4,7 @@
   (global = global || self, global['umi-plugin-cordova-ui'] = factory(global.React, global.antd));
 }(this, (function (React, antd) { 'use strict';
 
-  React = React && React.hasOwnProperty('default') ? React['default'] : React;
+  var React__default = 'default' in React ? React['default'] : React;
 
   function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
     try {
@@ -42,12 +42,68 @@
     };
   }
 
+  function _slicedToArray(arr, i) {
+    return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
+  }
+
+  function _arrayWithHoles(arr) {
+    if (Array.isArray(arr)) return arr;
+  }
+
+  function _iterableToArrayLimit(arr, i) {
+    if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return;
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"] != null) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableRest() {
+    throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
   var TAG = "org.alexzeng.umi-plugin-cordova-enhance";
   var index = (function (api) {
     function CommandPanel() {
-      return /*#__PURE__*/React.createElement(antd.Card, {
+      return /*#__PURE__*/React__default.createElement(antd.Card, {
         title: "Cordova\u76F8\u5173\u914D\u7F6E\u547D\u4EE4"
-      }, /*#__PURE__*/React.createElement(antd.Row, null, /*#__PURE__*/React.createElement("h2", null, "Cordova\u5B89\u88C5")), /*#__PURE__*/React.createElement(antd.Row, null, /*#__PURE__*/React.createElement(antd.Button, {
+      }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5B89\u88C5")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
         type: "primary",
         onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
           var _yield$api$callRemote, data;
@@ -81,9 +137,9 @@
             }
           }, _callee, null, [[0, 8]]);
         }))
-      }, "\u521D\u59CB\u5316Cordova\u73AF\u5883")), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(antd.Row, null, /*#__PURE__*/React.createElement("h2", null, "\u914D\u7F6EApp\u5E73\u53F0\u4FE1\u606F")), /*#__PURE__*/React.createElement(antd.Row, null, /*#__PURE__*/React.createElement(antd.Col, {
+      }, "\u521D\u59CB\u5316Cordova\u73AF\u5883")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "\u914D\u7F6EApp\u5E73\u53F0\u4FE1\u606F")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
         span: 2
-      }, /*#__PURE__*/React.createElement(antd.Button, {
+      }, /*#__PURE__*/React__default.createElement(antd.Button, {
         type: "primary",
         onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
           var _yield$api$callRemote2, data;
@@ -117,9 +173,9 @@
             }
           }, _callee2, null, [[0, 8]]);
         }))
-      }, "\u914D\u7F6EiOS\u5E73\u53F0")), /*#__PURE__*/React.createElement(antd.Col, {
+      }, "\u914D\u7F6EiOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
         span: 2
-      }, /*#__PURE__*/React.createElement(antd.Button, {
+      }, /*#__PURE__*/React__default.createElement(antd.Button, {
         type: "ghost",
         onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
           var _yield$api$callRemote3, data;
@@ -153,10 +209,10 @@
             }
           }, _callee3, null, [[0, 8]]);
         }))
-      }, "\u79FB\u9664iOS\u5E73\u53F0")), /*#__PURE__*/React.createElement(antd.Col, {
+      }, "\u79FB\u9664iOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
         span: 3,
         push: 2
-      }, /*#__PURE__*/React.createElement(antd.Button, {
+      }, /*#__PURE__*/React__default.createElement(antd.Button, {
         type: "primary",
         onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
           var _yield$api$callRemote4, data;
@@ -190,10 +246,10 @@
             }
           }, _callee4, null, [[0, 8]]);
         }))
-      }, "\u914D\u7F6EAndroid\u5E73\u53F0")), /*#__PURE__*/React.createElement(antd.Col, {
+      }, "\u914D\u7F6EAndroid\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
         span: 3,
         push: 2
-      }, /*#__PURE__*/React.createElement(antd.Button, {
+      }, /*#__PURE__*/React__default.createElement(antd.Button, {
         type: "ghost",
         onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
           var _yield$api$callRemote5, data;
@@ -230,11 +286,69 @@
       }, "\u79FB\u9664Android\u5E73\u53F0"))));
     }
 
+    function CordovaStatusPanel() {
+      var _useState = React.useState(""),
+          _useState2 = _slicedToArray(_useState, 2),
+          platforms = _useState2[0],
+          setPlatforms = _useState2[1];
+
+      var _useState3 = React.useState(""),
+          _useState4 = _slicedToArray(_useState3, 2),
+          plugins = _useState4[0],
+          setPlugins = _useState4[1];
+
+      React.useEffect(function () {
+        var getInfo = /*#__PURE__*/function () {
+          var _ref6 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
+            var _yield$api$callRemote6, data, platforms, plugins;
+
+            return regeneratorRuntime.wrap(function _callee6$(_context6) {
+              while (1) {
+                switch (_context6.prev = _context6.next) {
+                  case 0:
+                    _context6.next = 2;
+                    return api.callRemote({
+                      type: "".concat(TAG, ".getCordovaInfo")
+                    });
+
+                  case 2:
+                    _yield$api$callRemote6 = _context6.sent;
+                    data = _yield$api$callRemote6.data;
+                    platforms = data.platforms, plugins = data.plugins;
+                    setPlatforms(platforms);
+                    setPlugins(plugins);
+
+                  case 7:
+                  case "end":
+                    return _context6.stop();
+                }
+              }
+            }, _callee6);
+          }));
+
+          return function getInfo() {
+            return _ref6.apply(this, arguments);
+          };
+        }();
+
+        getInfo();
+      });
+      return /*#__PURE__*/React__default.createElement(antd.Card, {
+        title: "Cordova\u72B6\u6001"
+      }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, platforms)), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, plugins)));
+    }
+
     api.addPanel({
       title: "Cordova相关命令",
       path: "/cordova-commands",
       icon: "home",
       component: CommandPanel
+    });
+    api.addPanel({
+      title: "Cordova相关状态",
+      path: "/cordova-info",
+      icon: "home",
+      component: CordovaStatusPanel
     });
   });
 

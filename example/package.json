@@ -2,7 +2,9 @@
   "dependencies": {
     "cordova": "^10.0.0",
     "cordova-android": "^8.1.0",
-    "cordova-plugin-device": "^2.0.3"
+    "cordova-ios": "^5.1.1",
+    "cordova-plugin-device": "^2.0.3",
+    "umi-plugin-cordova-enhance": "*"
   },
   "scripts": {
     "mock:android": "umi build && umi cordova emulate android",
@@ -17,7 +19,7 @@
   },
   "cordova": {
     "platforms": [
-      "android"
+      "ios"
     ],
     "plugins": {
       "cordova-plugin-device": {}
