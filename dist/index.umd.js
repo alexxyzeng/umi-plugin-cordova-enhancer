@@ -130,8 +130,7 @@
                 case 2:
                   _yield$api$callRemote = _context.sent;
                   data = _yield$api$callRemote.data;
-                  platforms = data.platforms, plugins = data.plugins; // TODO: 增加对应的解析
-
+                  platforms = data.platforms, plugins = data.plugins;
                   parsedPlatforms = [];
                   parsedPlugins = [];
                   platforms.forEach(function (item, index) {
@@ -459,6 +458,11 @@
       }))
     }, "\u8FD0\u884CAndroid")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "primary",
+      onClick: function onClick() {
+        antd.message.error("需要前往终端执行yarn ci:ios来初始化");
+      }
+    }, "\u914D\u7F6EiOS ci"), /*#__PURE__*/React__default.createElement(antd.Button, {
+      type: "primary",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
         var _yield$api$callRemote9, data;
 
@@ -525,7 +529,7 @@
           }
         }, _callee10, null, [[0, 8]]);
       }))
-    }, "\u53D1\u5E03Android")));
+    }, "\u6253\u5305Android")));
   }
 
   function styleInject(css, ref) {

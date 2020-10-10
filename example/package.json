@@ -19,7 +19,8 @@
     "prepare:cordova": "umi cordova --prepare",
     "start": "umi dev",
     "build": "umi build",
-    "start:ui": "umi ui"
+    "start:ui": "umi ui",
+    "ci:ios": "cd platforms/ios && fastlane init"
   },
   "cordova": {
     "platforms": [

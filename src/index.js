@@ -260,7 +260,22 @@ function releaseAndroidApp(options, success, failure) {
   );
 }
 
+function configCI_iOS(_, success, failure) {
+  childProcess.spawn("fastlane init", { cwd: "platforms/ios" });
+}
+
 function releaseiOSApp(_, success, failure) {
+  const noFastlane = (childProcess.execSync("which fastlane") + "").includes(
+    "not Found"
+  );
+  if (noFastlane) {
+    return (
+      failure &&
+      failure({
+        message: '需要先安装fastlane, 可以执行"brew install fastlane"'
+      })
+    );
+  }
   childProcess.execSync(`cordova build ios && fastlane beta`);
 }
 

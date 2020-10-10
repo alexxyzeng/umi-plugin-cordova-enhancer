@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, message, Row } from "antd";
+import { Button, Card, message, Row } from "antd";
 import CordovaStatusPanel from "./Status";
 
 import { TAG } from "./const";
@@ -145,6 +145,14 @@ function CordovaCommandPanel({ api }) {
       </Row>
       <br />
       <Row>
+        <Button
+          type="primary"
+          onClick={() => {
+            message.error("需要前往终端执行yarn ci:ios来初始化");
+          }}
+        >
+          配置iOS ci
+        </Button>
         <Button
           type="primary"
           onClick={async () => {

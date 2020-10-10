@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, message, Row } from "antd";
+import { Button, Card, message, Row } from "antd";
 import { TAG } from "./const";
 
 function CordovaStatusPanel({ api }) {
