@@ -18,9 +18,9 @@ export default api => {
     component: () => <CordovaStatusPanel api={api} />
   });
 
-  // api.addPanel({
-  //   title: "Cordova配置",
-  //   path: "/cordova-config",
-  //   component: () => <ConfigurationPanel api={api} />
-  // });
+  api.addPanel({
+    title: "Cordova配置",
+    path: "/cordova-config",
+    component: () => <ConfigurationPanel api={api} />
+  });
 };

@@ -91,13 +91,20 @@ function writeInfos(widget, options) {
     name,
     description,
     author,
-    preference
+    allowNavigation,
+    allowIntent,
+    targetDevice,
+    prefs
   } = options;
+  const { preference } = finalWidget;
   finalWidget.defaultLocale = locale;
   finalWidget.id = id;
   finalWidget.version = version;
   finalWidget.name["$t"] = name;
   finalWidget.description["$t"] = description;
+  if (allowNavigation) {
+    finalWidget["allow-navigation"] = allowNavigation;
+  }
   if (author) {
     const { email, href, name: authorName } = author;
     finalWidget.author = {
@@ -106,9 +113,39 @@ function writeInfos(widget, options) {
       $t: authorName
     };
   }
-
-  // 修改allow-intent
+  if (Array.isArray(allowIntent)) {
+    finalWidget["allow-intent"] = allowIntent
+      .filter(item => {
+        return item !== null || item !== undefined;
+      })
+      .map(item => {
+        return {
+          href: item
+        };
+      });
+  }
+  if (prefs) {
+    finalWidget["preference"] = preference.map(item => {
+      const { name, value } = item;
+      const finalValue = prefs[name];
+      if (finalValue) {
+        return { name, value: finalValue };
+      }
+      return item;
+    });
+  }
   return finalWidget;
 }
 
-export { parseConfig };
+function getConfig(options) {
+  const { configPath } = options;
+  const configXml = fs.readFileSync(configPath, "utf-8");
+  const widget = JSON.parse(parser.toJson(configXml, { reversible: true }));
+  return widget;
+}
+
+function updateConfig(widget, options) {
+  fs.writeFileSync(options.configPath, format(parser.toXml(widget)));
+}
+
+export { parseConfig, getConfig, updateConfig };

@@ -42,6 +42,55 @@
     };
   }
 
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
   function _slicedToArray(arr, i) {
     return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
@@ -532,6 +581,227 @@
     }, "\u6253\u5305Android")));
   }
 
+  function Configuration(_ref) {
+    var api = _ref.api;
+
+    var _Form$useForm = antd.Form.useForm(),
+        _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
+        form = _Form$useForm2[0];
+
+    var Field = api.Field;
+
+    var _useState = React.useState(),
+        _useState2 = _slicedToArray(_useState, 2),
+        initialValues = _useState2[0],
+        setInitialValues = _useState2[1];
+
+    var prefRef = React.useRef({});
+    React.useEffect(function () {
+      api.callRemote({
+        type: "".concat(TAG, ".getCordovaConfig")
+      }).then(function (_ref2) {
+        var _widget$allowIntent, _widget$allowNavigat;
+
+        var data = _ref2.data;
+
+        var _ref3 = data || {},
+            widget = _ref3.widget;
+
+        console.log(widget, "---- widget");
+
+        var _ref4 = widget || {},
+            author = _ref4.author,
+            preference = _ref4.preference,
+            version = _ref4.version,
+            id = _ref4.id,
+            name = _ref4.name;
+
+        var allowIntent = ((_widget$allowIntent = widget["allow-intent"]) === null || _widget$allowIntent === void 0 ? void 0 : _widget$allowIntent.map(function (item) {
+          return item.href;
+        })) || [];
+        var initialValue = {};
+
+        var _ref5 = author || {},
+            _ref5$email = _ref5.email,
+            email = _ref5$email === void 0 ? "" : _ref5$email,
+            _ref5$href = _ref5.href,
+            href = _ref5$href === void 0 ? "" : _ref5$href,
+            _ref5$$t = _ref5.$t,
+            authorName = _ref5$$t === void 0 ? "" : _ref5$$t;
+
+        initialValue = {
+          id: id,
+          version: version,
+          allowIntent: allowIntent
+        };
+        initialValue["name"] = (name === null || name === void 0 ? void 0 : name["$t"]) || "";
+        initialValue["author.email"] = email;
+        initialValue["author.href"] = href;
+        initialValue["author.name"] = authorName;
+        initialValue["allowNavigation"] = ((_widget$allowNavigat = widget["allow-navigation"]) === null || _widget$allowNavigat === void 0 ? void 0 : _widget$allowNavigat.href) || "*";
+        var prefHash = {};
+        preference === null || preference === void 0 ? void 0 : preference.forEach(function (pref) {
+          var name = pref.name,
+              value = pref.value;
+          prefHash[name] = value;
+        });
+
+        if (!prefHash["Orientation"]) {
+          prefHash["Orientation"] = "default";
+        }
+
+        if (!prefHash["target-device"]) {
+          prefHash["target-device"] = "universal";
+        }
+
+        if (!prefHash["FullScreen"]) {
+          prefHash["FullScreen"] = false;
+        }
+
+        prefRef.current = prefHash;
+        initialValue["preference.Orientation"] = prefHash["Orientation"] || "default";
+        initialValue["preference.target-device"] = prefHash["target-device"] || "universal";
+        initialValue["preference.FullScreen"] = prefHash["FullScreen"] || false;
+        setInitialValues(initialValue);
+      });
+    }, []);
+
+    if (!initialValues) {
+      return null;
+    }
+
+    return /*#__PURE__*/React__default.createElement(antd.Card, {
+      title: "\u914D\u7F6EConfig.xml",
+      style: {
+        overflowY: "scroll"
+      }
+    }, /*#__PURE__*/React__default.createElement("div", {
+      style: {
+        overflowY: "scroll",
+        maxHeight: 700
+      }
+    }, /*#__PURE__*/React__default.createElement(antd.Form, {
+      form: form,
+      onFinish: function onFinish(values) {
+        console.log("values ----", values);
+        var formValue = {};
+        var author = {
+          name: {}
+        };
+        var id = values.id,
+            version = values.version,
+            name = values.name,
+            allowIntent = values.allowIntent,
+            allowNavigation = values.allowNavigation;
+        author["email"] = values["author.email"] || "";
+        author["href"] = values["author.href"] || "";
+        author["name"]["$t"] = values["author.name"] || "";
+        formValue["allow-intent"] = allowIntent === null || allowIntent === void 0 ? void 0 : allowIntent.filter(function (item) {
+          return item !== null && item !== "";
+        }).map(function (item) {
+          return {
+            href: item
+          };
+        });
+        formValue["allow-navigation"] = allowNavigation || "*";
+        var preference = [];
+        var prefHash = prefRef.current || {};
+
+        for (var key in prefHash) {
+          var prefValue = values["preference.".concat(key)];
+
+          if (prefValue) {
+            prefHash[key] = prefValue;
+          }
+
+          preference.push({
+            name: key,
+            value: prefHash[key]
+          });
+        }
+
+        formValue = _objectSpread2(_objectSpread2(_objectSpread2({}, initialValues), formValue), {}, {
+          id: id,
+          version: version,
+          name: name,
+          preference: preference,
+          author: author
+        });
+        console.log("final form values ----", formValue); // TODO: 数据转换
+      },
+      initialValues: initialValues
+    }, /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "id",
+      label: "App Id",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "version",
+      label: "App \u7248\u672C\u53F7",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "name",
+      label: "App \u540D\u79F0",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "allowIntent",
+      label: "allow-intent",
+      type: "string[]"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "author.email",
+      label: "\u4F5C\u8005\u90AE\u7BB1",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "author.href",
+      label: "\u4F5C\u8005\u76F8\u5173\u94FE\u63A5",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "author.name",
+      label: "\u4F5C\u8005\u540D\u79F0",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "allowNavigation",
+      label: "allow-navigation",
+      type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "preference.Orientation",
+      label: "Orientation",
+      type: "list",
+      options: ["default", "landscape", "portrait"]
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "preference.target-device",
+      label: "\u8BBE\u5907\u7C7B\u578B",
+      type: "list",
+      options: ["universal", "handset", "tablet"]
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "preference.FullScreen",
+      label: "\u662F\u5426\u5168\u5C4F",
+      type: "boolean"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "other",
+      label: "\u5176\u4ED6\u914D\u7F6E",
+      type: "any"
+    }), /*#__PURE__*/React__default.createElement(antd.Form.Item, {
+      shouldUpdate: true
+    }, function (_ref6) {
+      var getFieldsValue = _ref6.getFieldsValue;
+      return /*#__PURE__*/React__default.createElement("pre", null, JSON.stringify(getFieldsValue(), null, 2));
+    }), /*#__PURE__*/React__default.createElement(antd.Button, {
+      htmlType: "submit"
+    }, "Submit"))));
+  }
+
   function styleInject(css, ref) {
     if ( ref === void 0 ) ref = {};
     var insertAt = ref.insertAt;
@@ -582,11 +852,16 @@
           api: api
         });
       }
-    }); // api.addPanel({
-    //   title: "Cordova配置",
-    //   path: "/cordova-config",
-    //   component: () => <ConfigurationPanel api={api} />
-    // });
+    });
+    api.addPanel({
+      title: "Cordova配置",
+      path: "/cordova-config",
+      component: function component() {
+        return /*#__PURE__*/React__default.createElement(Configuration, {
+          api: api
+        });
+      }
+    });
   });
 
   return index;

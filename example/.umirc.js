@@ -20,6 +20,7 @@ export default {
             href: "#",
             name: "xxx"
           },
+          allowNavigation: "*",
           permissions: [
             {
               type: "camera",

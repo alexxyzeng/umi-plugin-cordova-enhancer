@@ -8,7 +8,7 @@ import {
   updatePackageJson,
   addCordova
 } from "./utils/initCordova";
-import { parseConfig } from "./utils/config";
+import { getConfig, parseConfig } from "./utils/config";
 import { stdout } from "process";
 import chalk from "chalk";
 
@@ -60,6 +60,9 @@ const commands = {
   },
   releaseAndroid: (options, success, failure) => {
     releaseAndroidApp(options, success, failure);
+  },
+  getCordovaConfig: (options, success, failure) => {
+    getCordovaConfig(options, success, failure);
   }
 };
 
@@ -142,7 +145,6 @@ function initCordova(options, success) {
 function updateCordovaPlatform(args, success, failure) {
   const list = childProcess.execSync("cordova platform ls") + "";
   const installedPlatforms = list.slice(0, list.indexOf("Available platforms"));
-  // TODO: 在安装前检查对应的platform是否已存在
   const [action = "add", platform = "ios"] = args._ || [];
   if (action === "add" && installedPlatforms.includes(platform)) {
     console.log(
@@ -299,9 +301,10 @@ function getCordovaDetails(_, success, failure) {
     });
 }
 
-// TODO: 初始化iOS ci环境
-
-function updateConfig(options, baseConfigPath) {
-  const { configPath, config, resPath } = options;
-  parseConfig({ ...config, configPath, resPath }, baseConfigPath);
+function getCordovaConfig(options, success, failure) {
+  const config = getConfig(options);
+  success &&
+    success({
+      data: config
+    });
 }
