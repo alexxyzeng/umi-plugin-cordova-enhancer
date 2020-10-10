@@ -1,28 +1,23 @@
-<widget defaultlocale="zh_CN" id="com.dfocus.fmapp" version="1.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" defaultLocale="zh_CN">
+<widget defaultlocale="zh_CN" id="com.dfocus.datacockpit" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" defaultLocale="zh_CN">
+    <allow-navigation href="aaaa"></allow-navigation>
     <name>
         fmapp
     </name>
     <description>
-        fmapp
+        范德萨发的说法
     </description>
     <author email="xxx@df.com" href="#">
         xxx
     </author>
     <content src="index.html"></content>
     <access origin="*"></access>
-    <allow-navigation href="*" />
     <allow-intent href="http://*/*"></allow-intent>
     <allow-intent href="https://*/*"></allow-intent>
-    <allow-intent href="tel:*"></allow-intent>
-    <allow-intent href="sms:*"></allow-intent>
     <allow-intent href="mailto:*"></allow-intent>
     <allow-intent href="geo:*"></allow-intent>
-    <preference name="target-device" value="handset"></preference>
-    <preference name="StatusBarOverlaysWebView" value="true"></preference>
-    <preference name="StatusBarStyle" value="default"></preference>
-    <preference name="SwiftVersion" value="5"></preference>
-    <preference name="SplashScreenDelay" value="3000"></preference>
-    <preference name="Orientation" value="portrait"></preference>
+    <preference key="Orientation" value="default"></preference>
+    <preference key="target-device" value="universal"></preference>
+    <preference key="FullScreen" value="true"></preference>
     <platform name="android">
         <allow-intent href="market:*"></allow-intent>
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">

@@ -8,7 +8,7 @@ import {
   updatePackageJson,
   addCordova
 } from "./utils/initCordova";
-import { getConfig, parseConfig } from "./utils/config";
+import { getConfig, parseConfig, updateConfig } from "./utils/config";
 import { stdout } from "process";
 import chalk from "chalk";
 
@@ -63,6 +63,9 @@ const commands = {
   },
   getCordovaConfig: (options, success, failure) => {
     getCordovaConfig(options, success, failure);
+  },
+  updateCordovaConfig: (options, success, failure, params) => {
+    updateCordovaConfig(options, success, failure, params);
   }
 };
 
@@ -74,7 +77,8 @@ const commands = {
 export default function(api, options) {
   api.addUIPlugin(require.resolve("../dist/index.umd"));
   api.onUISocket(({ action, failure, success }) => {
-    const { type } = action;
+    const { type, payload } = action;
+    console.log(payload, "---- params");
     if (!type.startsWith(TAG)) {
       failure({
         message: "输入的指令不正确"
@@ -88,7 +92,7 @@ export default function(api, options) {
         message: "未找到对应的指令"
       });
     }
-    command(options, success, failure);
+    command(options, success, failure, payload);
   });
 
   api.modifyDefaultConfig(config => {
@@ -307,4 +311,9 @@ function getCordovaConfig(options, success, failure) {
     success({
       data: config
     });
+}
+
+function updateCordovaConfig(options, success, failure, params) {
+  const finalOptions = { ...options, config: params };
+  updateConfig(finalOptions);
 }

@@ -614,12 +614,14 @@
             preference = _ref4.preference,
             version = _ref4.version,
             id = _ref4.id,
-            name = _ref4.name;
+            name = _ref4.name,
+            description = _ref4.description;
 
         var allowIntent = ((_widget$allowIntent = widget["allow-intent"]) === null || _widget$allowIntent === void 0 ? void 0 : _widget$allowIntent.map(function (item) {
           return item.href;
         })) || [];
-        var initialValue = {};
+
+        var initialValue = _objectSpread2({}, widget);
 
         var _ref5 = author || {},
             _ref5$email = _ref5.email,
@@ -638,12 +640,13 @@
         initialValue["author.email"] = email;
         initialValue["author.href"] = href;
         initialValue["author.name"] = authorName;
+        initialValue["description"] = (description === null || description === void 0 ? void 0 : description["$t"]) || "";
         initialValue["allowNavigation"] = ((_widget$allowNavigat = widget["allow-navigation"]) === null || _widget$allowNavigat === void 0 ? void 0 : _widget$allowNavigat.href) || "*";
         var prefHash = {};
         preference === null || preference === void 0 ? void 0 : preference.forEach(function (pref) {
-          var name = pref.name,
+          var key = pref.key,
               value = pref.value;
-          prefHash[name] = value;
+          prefHash[key] = value;
         });
 
         if (!prefHash["Orientation"]) {
@@ -654,14 +657,12 @@
           prefHash["target-device"] = "universal";
         }
 
-        if (!prefHash["FullScreen"]) {
-          prefHash["FullScreen"] = false;
-        }
-
+        prefHash["FullScreen"] = prefHash["FullScreen"] === "true";
+        console.log(prefHash, "---- pref ---", preference);
         prefRef.current = prefHash;
         initialValue["preference.Orientation"] = prefHash["Orientation"] || "default";
         initialValue["preference.target-device"] = prefHash["target-device"] || "universal";
-        initialValue["preference.FullScreen"] = prefHash["FullScreen"] || false;
+        initialValue["preference.FullScreen"] = prefHash["FullScreen"];
         setInitialValues(initialValue);
       });
     }, []);
@@ -683,7 +684,6 @@
     }, /*#__PURE__*/React__default.createElement(antd.Form, {
       form: form,
       onFinish: function onFinish(values) {
-        console.log("values ----", values);
         var formValue = {};
         var author = {
           name: {}
@@ -692,42 +692,45 @@
             version = values.version,
             name = values.name,
             allowIntent = values.allowIntent,
-            allowNavigation = values.allowNavigation;
+            allowNavigation = values.allowNavigation,
+            description = values.description;
         author["email"] = values["author.email"] || "";
         author["href"] = values["author.href"] || "";
-        author["name"]["$t"] = values["author.name"] || "";
-        formValue["allow-intent"] = allowIntent === null || allowIntent === void 0 ? void 0 : allowIntent.filter(function (item) {
-          return item !== null && item !== "";
-        }).map(function (item) {
-          return {
-            href: item
-          };
-        });
-        formValue["allow-navigation"] = allowNavigation || "*";
+        author["name"] = values["author.name"] || "";
         var preference = [];
         var prefHash = prefRef.current || {};
 
         for (var key in prefHash) {
           var prefValue = values["preference.".concat(key)];
-
-          if (prefValue) {
-            prefHash[key] = prefValue;
-          }
-
+          prefHash[key] = prefValue;
           preference.push({
             name: key,
             value: prefHash[key]
           });
         }
 
-        formValue = _objectSpread2(_objectSpread2(_objectSpread2({}, initialValues), formValue), {}, {
+        formValue = _objectSpread2(_objectSpread2(_objectSpread2({}, values), formValue), {}, {
           id: id,
           version: version,
           name: name,
           preference: preference,
-          author: author
+          author: author,
+          prefs: prefHash,
+          allowIntent: allowIntent,
+          allowNavigation: allowNavigation
         });
-        console.log("final form values ----", formValue); // TODO: 数据转换
+        var uselessKeys = ["author.email", "author.href", "author.name", "preference.FullScreen", "preference.target-device", "preference.Orientation" // "allowNavigation",
+        // "allowIntent"
+        ];
+        console.log("values ----", formValue);
+        uselessKeys.forEach(function (key) {
+          return delete formValue[key];
+        }); // TODO: 数据转换
+
+        api.callRemote({
+          type: "".concat(TAG, ".updateCordovaConfig"),
+          payload: formValue
+        });
       },
       initialValues: initialValues
     }, /*#__PURE__*/React__default.createElement(Field, {
@@ -745,6 +748,11 @@
       name: "name",
       label: "App \u540D\u79F0",
       type: "string"
+    }), /*#__PURE__*/React__default.createElement(Field, {
+      form: form,
+      name: "description",
+      label: "App \u63CF\u8FF0\u4FE1\u606F",
+      type: "textarea"
     }), /*#__PURE__*/React__default.createElement(Field, {
       form: form,
       name: "allowIntent",
@@ -792,11 +800,6 @@
       name: "other",
       label: "\u5176\u4ED6\u914D\u7F6E",
       type: "any"
-    }), /*#__PURE__*/React__default.createElement(antd.Form.Item, {
-      shouldUpdate: true
-    }, function (_ref6) {
-      var getFieldsValue = _ref6.getFieldsValue;
-      return /*#__PURE__*/React__default.createElement("pre", null, JSON.stringify(getFieldsValue(), null, 2));
     }), /*#__PURE__*/React__default.createElement(antd.Button, {
       htmlType: "submit"
     }, "Submit"))));

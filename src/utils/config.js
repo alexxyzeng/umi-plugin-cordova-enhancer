@@ -16,10 +16,6 @@ function parseConfig(options, baseConfigPath) {
     options
   );
   fs.writeFileSync(
-    "./test.js",
-    JSON.stringify({ ...config, widget: finalWidget }, null, 2)
-  );
-  fs.writeFileSync(
     options.configPath,
     format(parser.toXml({ ...config, widget: finalWidget }))
   );
@@ -96,14 +92,21 @@ function writeInfos(widget, options) {
     targetDevice,
     prefs
   } = options;
-  const { preference } = finalWidget;
+  const { preference } = widget;
   finalWidget.defaultLocale = locale;
   finalWidget.id = id;
   finalWidget.version = version;
-  finalWidget.name["$t"] = name;
-  finalWidget.description["$t"] = description;
+  if (!finalWidget.name) {
+    finalWidget.name = {};
+  }
+  finalWidget.name["$t"] = name || "";
+  if (!finalWidget.description) {
+    finalWidget.description = {};
+  }
+  finalWidget.description["$t"] = description || "";
+  finalWidget.description["$t"] = description || "";
   if (allowNavigation) {
-    finalWidget["allow-navigation"] = allowNavigation;
+    finalWidget["allow-navigation"] = { href: allowNavigation };
   }
   if (author) {
     const { email, href, name: authorName } = author;
@@ -125,14 +128,16 @@ function writeInfos(widget, options) {
       });
   }
   if (prefs) {
-    finalWidget["preference"] = preference.map(item => {
-      const { name, value } = item;
-      const finalValue = prefs[name];
-      if (finalValue) {
-        return { name, value: finalValue };
-      }
-      return item;
-    });
+    console.log(prefs, "---- prefs");
+    console.log(preference, "---- preference");
+    let prefList = [];
+    for (let prefKey in prefs) {
+      prefList.push({
+        key: prefKey,
+        value: prefs[prefKey]
+      });
+    }
+    finalWidget["preference"] = prefList;
   }
   return finalWidget;
 }
@@ -144,8 +149,11 @@ function getConfig(options) {
   return widget;
 }
 
-function updateConfig(widget, options) {
-  fs.writeFileSync(options.configPath, format(parser.toXml(widget)));
+function updateConfig(options) {
+  const { config, configPath } = options;
+  const { widget } = getConfig(options);
+  const finalConfig = writeInfos(widget, config);
+  fs.writeFileSync(configPath, format(parser.toXml({ widget: finalConfig })));
 }
 
 export { parseConfig, getConfig, updateConfig };
