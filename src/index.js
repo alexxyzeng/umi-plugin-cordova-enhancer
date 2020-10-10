@@ -58,10 +58,8 @@ const commands = {
       message: "当前功能未实现"
     });
   },
-  releaseAndroid: () => {
-    failure({
-      message: "当前功能未实现"
-    });
+  releaseAndroid: (options, success, failure) => {
+    releaseAndroidApp(options, success, failure);
   }
 };
 
@@ -245,7 +243,10 @@ function releaseApp(args, options) {
 
 function releaseAndroidApp(options, success, failure) {
   childProcess.execSync(`cordova build android --release`);
-  // TODO: 移动App到指定位置
+  success &&
+    success({
+      data: "Release成功"
+    });
   const { apkOutputPath } = options;
   if (!apkOutputPath) {
     return;
@@ -266,9 +267,13 @@ function getCordovaDetails(_, success, failure) {
   const platforms = childProcess.execSync("cordova platform ls") + "";
   const installedPlatforms = platforms
     .slice(0, platforms.indexOf("Available platforms"))
-    .replace("Installed platforms:", "")
-    .split("\n");
-  const plugins = childProcess.execSync("cordova plugin ls") + "";
+    .replace(/Installed platforms:|\n/g, "")
+    .split(" ")
+    .filter(item => item !== "");
+  const plugins = (childProcess.execSync("cordova plugin ls") + "")
+    .replace(/\n/g, "")
+    .split('"')
+    .filter(item => item !== "");
   success &&
     success({
       data: {

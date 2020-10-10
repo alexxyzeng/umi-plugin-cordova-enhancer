@@ -103,12 +103,12 @@
   function CordovaStatusPanel(_ref) {
     var api = _ref.api;
 
-    var _useState = React.useState(""),
+    var _useState = React.useState([]),
         _useState2 = _slicedToArray(_useState, 2),
         platforms = _useState2[0],
         setPlatforms = _useState2[1];
 
-    var _useState3 = React.useState(""),
+    var _useState3 = React.useState([]),
         _useState4 = _slicedToArray(_useState3, 2),
         plugins = _useState4[0],
         setPlugins = _useState4[1];
@@ -116,7 +116,7 @@
     React.useEffect(function () {
       var getInfo = /*#__PURE__*/function () {
         var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-          var _yield$api$callRemote, data, platforms, plugins;
+          var _yield$api$callRemote, data, platforms, plugins, parsedPlatforms, parsedPlugins;
 
           return regeneratorRuntime.wrap(function _callee$(_context) {
             while (1) {
@@ -131,10 +131,24 @@
                   _yield$api$callRemote = _context.sent;
                   data = _yield$api$callRemote.data;
                   platforms = data.platforms, plugins = data.plugins;
-                  setPlatforms(platforms);
-                  setPlugins(plugins);
+                  console.log(data, "---- data"); // TODO: 增加对应的解析
 
-                case 7:
+                  parsedPlatforms = [];
+                  parsedPlugins = [];
+                  platforms.forEach(function (item, index) {
+                    if (index % 2 === 0) {
+                      parsedPlatforms.push("".concat(item.trim(), " \u7248\u672C: ").concat(platforms[index + 1]));
+                    }
+                  });
+                  plugins.forEach(function (item, index) {
+                    if (index % 2 === 0) {
+                      parsedPlugins.push("".concat(item.trim()));
+                    }
+                  });
+                  setPlatforms(parsedPlatforms);
+                  setPlugins(parsedPlugins);
+
+                case 12:
                 case "end":
                   return _context.stop();
               }
@@ -148,10 +162,24 @@
       }();
 
       getInfo();
-    });
+    }, []);
     return /*#__PURE__*/React__default.createElement(antd.Card, {
       title: "Cordova\u72B6\u6001"
-    }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, platforms)), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("div", null, plugins)));
+    }, /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5E73\u53F0\u72B6\u6001")), platforms.map(function (platform) {
+      return /*#__PURE__*/React__default.createElement(antd.Row, {
+        key: platform,
+        style: {
+          padding: 4
+        }
+      }, platform);
+    }), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u63D2\u4EF6\u72B6\u6001")), plugins.map(function (plugin) {
+      return /*#__PURE__*/React__default.createElement(antd.Row, {
+        key: plugin,
+        style: {
+          padding: 4
+        }
+      }, plugin);
+    }));
   }
 
   function CordovaCommandPanel(_ref) {

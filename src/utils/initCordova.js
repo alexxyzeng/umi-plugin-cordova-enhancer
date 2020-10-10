@@ -51,7 +51,8 @@ function updatePackageJson(options) {
     [
       "mock:ios",
       `umi build && cordova build ios && open -a Xcode ./platforms/ios/${appName}.xcworkspace`
-    ]
+    ],
+    ["start:ui", "umi ui"]
   ];
   cordovaScripts.forEach(cordovaScript => {
     const [scriptName, scriptCommand] = cordovaScript;
