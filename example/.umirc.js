@@ -39,7 +39,8 @@ export default {
             }
           ]
         },
-        apkOutputPath: __dirname + "/apk"
+        apkOutputPath: __dirname + "/apk",
+        apkOutputName: "数据中心"
       }
     ]
   ]

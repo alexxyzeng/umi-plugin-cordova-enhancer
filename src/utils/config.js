@@ -16,6 +16,10 @@ function parseConfig(options, baseConfigPath) {
     options
   );
   fs.writeFileSync(
+    "./test.js",
+    JSON.stringify({ ...config, widget: finalWidget }, null, 2)
+  );
+  fs.writeFileSync(
     options.configPath,
     format(parser.toXml({ ...config, widget: finalWidget }))
   );
@@ -86,18 +90,24 @@ function writeInfos(widget, options) {
     version,
     name,
     description,
-    author: { email, href, name: authorName }
+    author,
+    preference
   } = options;
   finalWidget.defaultLocale = locale;
   finalWidget.id = id;
   finalWidget.version = version;
   finalWidget.name["$t"] = name;
   finalWidget.description["$t"] = description;
-  finalWidget.author = {
-    email,
-    href,
-    $t: authorName
-  };
+  if (author) {
+    const { email, href, name: authorName } = author;
+    finalWidget.author = {
+      email,
+      href,
+      $t: authorName
+    };
+  }
+
+  // 修改allow-intent
   return finalWidget;
 }
 

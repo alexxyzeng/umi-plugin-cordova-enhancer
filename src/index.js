@@ -247,7 +247,7 @@ function releaseAndroidApp(options, success, failure) {
     success({
       data: "Release成功"
     });
-  const { apkOutputPath } = options;
+  const { apkOutputPath, apkOutputName = "app-release" } = options;
   if (!apkOutputPath) {
     return;
   }
@@ -255,7 +255,8 @@ function releaseAndroidApp(options, success, failure) {
     fs.mkdirSync(apkOutputPath);
   }
   childProcess.execSync(
-    `cp platforms/android/app/build/outputs/apk/release/app-release*.apk ${apkOutputPath}/app-release.apk`
+    `cp platforms/android/app/build/outputs/apk/release/app-release*.apk ${apkOutputPath}/${apkOutputName}.apk` +
+      ` && cd ${apkOutputPath} && open .`
   );
 }
 

@@ -11,7 +11,6 @@ function CordovaStatusPanel({ api }) {
         type: `${TAG}.getCordovaInfo`
       });
       const { platforms, plugins } = data;
-      // TODO: 增加对应的解析
       let parsedPlatforms = [];
       let parsedPlugins = [];
       platforms.forEach((item, index) => {

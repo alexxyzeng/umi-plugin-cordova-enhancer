@@ -130,8 +130,7 @@
                 case 2:
                   _yield$api$callRemote = _context.sent;
                   data = _yield$api$callRemote.data;
-                  platforms = data.platforms, plugins = data.plugins;
-                  console.log(data, "---- data"); // TODO: 增加对应的解析
+                  platforms = data.platforms, plugins = data.plugins; // TODO: 增加对应的解析
 
                   parsedPlatforms = [];
                   parsedPlugins = [];
@@ -148,7 +147,7 @@
                   setPlatforms(parsedPlatforms);
                   setPlugins(parsedPlugins);
 
-                case 12:
+                case 11:
                 case "end":
                   return _context.stop();
               }
@@ -220,9 +219,7 @@
           }
         }, _callee, null, [[0, 8]]);
       }))
-    }, "\u521D\u59CB\u5316Cordova\u73AF\u5883")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "\u914D\u7F6EApp\u5E73\u53F0\u4FE1\u606F")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u521D\u59CB\u5316Cordova\u73AF\u5883")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "\u914D\u7F6EApp\u5E73\u53F0\u4FE1\u606F")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "primary",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var _yield$api$callRemote2, data;
@@ -256,9 +253,7 @@
           }
         }, _callee2, null, [[0, 8]]);
       }))
-    }, "\u914D\u7F6EiOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u914D\u7F6EiOS\u5E73\u53F0"), /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "ghost",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
         var _yield$api$callRemote3, data;
@@ -292,10 +287,7 @@
           }
         }, _callee3, null, [[0, 8]]);
       }))
-    }, "\u79FB\u9664iOS\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3,
-      push: 2
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u79FB\u9664iOS\u5E73\u53F0"), /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "primary",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
         var _yield$api$callRemote4, data;
@@ -329,10 +321,7 @@
           }
         }, _callee4, null, [[0, 8]]);
       }))
-    }, "\u914D\u7F6EAndroid\u5E73\u53F0")), /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3,
-      push: 2
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u914D\u7F6EAndroid\u5E73\u53F0"), /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "ghost",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
         var _yield$api$callRemote5, data;
@@ -366,9 +355,7 @@
           }
         }, _callee5, null, [[0, 8]]);
       }))
-    }, "\u79FB\u9664Android\u5E73\u53F0"))), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5176\u4ED6\u547D\u4EE4")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u79FB\u9664Android\u5E73\u53F0")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement("h3", null, "Cordova\u5176\u4ED6\u547D\u4EE4")), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "ghost",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
         var _yield$api$callRemote6, data;
@@ -402,9 +389,7 @@
           }
         }, _callee6, null, [[0, 8]]);
       }))
-    }, "\u8C03\u8BD5iOS")), /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u8C03\u8BD5iOS"), /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "ghost",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
         var _yield$api$callRemote7, data;
@@ -438,9 +423,7 @@
           }
         }, _callee7, null, [[0, 8]]);
       }))
-    }, "\u8C03\u8BD5Android")), /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u8C03\u8BD5Android"), /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "primary",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee8() {
         var _yield$api$callRemote8, data;
@@ -474,9 +457,7 @@
           }
         }, _callee8, null, [[0, 8]]);
       }))
-    }, "\u8FD0\u884CAndroid"))), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u8FD0\u884CAndroid")), /*#__PURE__*/React__default.createElement("br", null), /*#__PURE__*/React__default.createElement(antd.Row, null, /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "primary",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee9() {
         var _yield$api$callRemote9, data;
@@ -510,9 +491,7 @@
           }
         }, _callee9, null, [[0, 8]]);
       }))
-    }, "\u53D1\u5E03iOS")), /*#__PURE__*/React__default.createElement(antd.Col, {
-      span: 3
-    }, /*#__PURE__*/React__default.createElement(antd.Button, {
+    }, "\u53D1\u5E03iOS"), /*#__PURE__*/React__default.createElement(antd.Button, {
       type: "primary",
       onClick: /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee10() {
         var _yield$api$callRemote10, data;
@@ -546,104 +525,38 @@
           }
         }, _callee10, null, [[0, 8]]);
       }))
-    }, "\u53D1\u5E03Android"))));
+    }, "\u53D1\u5E03Android")));
   }
 
-  function Configuration(_ref) {
-    var api = _ref.api;
+  function styleInject(css, ref) {
+    if ( ref === void 0 ) ref = {};
+    var insertAt = ref.insertAt;
 
-    var _Form$useForm = antd.Form.useForm(),
-        _Form$useForm2 = _slicedToArray(_Form$useForm, 1),
-        form = _Form$useForm2[0];
+    if (!css || typeof document === 'undefined') { return; }
 
-    var TwoColumnPanel = api.TwoColumnPanel,
-        Field = api.Field;
-    return /*#__PURE__*/React__default.createElement(antd.Card, {
-      title: "\u914D\u7F6EConfig.xml",
-      style: {
-        overflowY: "scroll"
+    var head = document.head || document.getElementsByTagName('head')[0];
+    var style = document.createElement('style');
+    style.type = 'text/css';
+
+    if (insertAt === 'top') {
+      if (head.firstChild) {
+        head.insertBefore(style, head.firstChild);
+      } else {
+        head.appendChild(style);
       }
-    }, /*#__PURE__*/React__default.createElement("div", {
-      style: {
-        overflowY: "scroll",
-        maxHeight: 1000
-      }
-    }, /*#__PURE__*/React__default.createElement(antd.Form, {
-      form: form,
-      onFinish: function onFinish(values) {
-        console.log("values ----", values);
-      }
-    }, /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "id",
-      label: "App Id",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "version",
-      label: "App \u7248\u672C\u53F7",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "name",
-      label: "App \u540D\u79F0",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "allow-intent",
-      label: "allow-intent",
-      type: "string[]"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "author.email",
-      label: "\u4F5C\u8005\u90AE\u7BB1",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "author.href",
-      label: "\u4F5C\u8005\u76F8\u5173\u94FE\u63A5",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "author.name",
-      label: "\u4F5C\u8005\u540D\u79F0",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "allow-navigation",
-      label: "allow-navigation",
-      type: "string"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "preference.Orientation",
-      label: "Orientation",
-      type: "list",
-      options: ["default", "landscape", "portrait"]
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "preference.target-device",
-      label: "\u8BBE\u5907\u7C7B\u578B",
-      type: "list",
-      options: ["universal", "handset", "tablet"]
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "preference.FullScreen",
-      label: "\u662F\u5426\u5168\u5C4F",
-      type: "boolean"
-    }), /*#__PURE__*/React__default.createElement(Field, {
-      form: form,
-      name: "other",
-      label: "\u5176\u4ED6\u914D\u7F6E",
-      type: "any"
-    }), /*#__PURE__*/React__default.createElement(antd.Form.Item, {
-      shouldUpdate: true
-    }, function (_ref2) {
-      var getFieldsValue = _ref2.getFieldsValue;
-      return /*#__PURE__*/React__default.createElement("pre", null, JSON.stringify(getFieldsValue(), null, 2));
-    }), /*#__PURE__*/React__default.createElement(antd.Button, {
-      htmlType: "submit"
-    }, "Submit"))));
+    } else {
+      head.appendChild(style);
+    }
+
+    if (style.styleSheet) {
+      style.styleSheet.cssText = css;
+    } else {
+      style.appendChild(document.createTextNode(css));
+    }
   }
+
+  var css = "button {\n  margin: 8px 0;\n  margin-right: 12px;\n}\n\nbody h3 {\n  font-weight: bold;\n}\n";
+  styleInject(css);
 
   var index = (function (api) {
     api.addPanel({
@@ -665,16 +578,11 @@
           api: api
         });
       }
-    });
-    api.addPanel({
-      title: "Cordova配置",
-      path: "/cordova-config",
-      component: function component() {
-        return /*#__PURE__*/React__default.createElement(Configuration, {
-          api: api
-        });
-      }
-    });
+    }); // api.addPanel({
+    //   title: "Cordova配置",
+    //   path: "/cordova-config",
+    //   component: () => <ConfigurationPanel api={api} />
+    // });
   });
 
   return index;
