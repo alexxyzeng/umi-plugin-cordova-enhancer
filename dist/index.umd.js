@@ -607,8 +607,6 @@
         var _ref3 = data || {},
             widget = _ref3.widget;
 
-        console.log(widget, "---- widget");
-
         var _ref4 = widget || {},
             author = _ref4.author,
             preference = _ref4.preference,
@@ -658,7 +656,6 @@
         }
 
         prefHash["FullScreen"] = prefHash["FullScreen"] === "true";
-        console.log(prefHash, "---- pref ---", preference);
         prefRef.current = prefHash;
         initialValue["preference.Orientation"] = prefHash["Orientation"] || "default";
         initialValue["preference.target-device"] = prefHash["target-device"] || "universal";

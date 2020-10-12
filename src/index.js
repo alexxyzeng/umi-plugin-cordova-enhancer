@@ -10,6 +10,7 @@ import {
 } from "./utils/initCordova";
 import { getConfig, parseConfig, updateConfig } from "./utils/config";
 import { stdout } from "process";
+import path from "path";
 import chalk from "chalk";
 
 const TAG = "org.alexzeng.umi-plugin-cordova-enhance";
@@ -193,6 +194,7 @@ function updateCordovaPlatform(args, success, failure) {
 }
 
 function updateCordovaPlugin(args, success, failure) {
+  const { _, variable } = args;
   const [action, plugin] = args._ || [];
   if (!action || !plugin) {
     // TODO: 错误提示
@@ -202,9 +204,21 @@ function updateCordovaPlugin(args, success, failure) {
       });
     return;
   }
-  childProcess.execSync(
-    `cordova plugin ${action} ${plugin} && cordova plugin save`
+  let addPluginCommand = `cordova plugin ${action} ${plugin}`;
+  if (Array.isArray(variable) && variable.length > 0) {
+    variable.forEach(item => {
+      addPluginCommand += ` --variable ${item}`;
+    });
+  }
+  addPluginCommand += " -- save";
+  // TODO: 如果有对应的types, 同时下载
+  childProcess.execSync(`${addPluginCommand}`);
+  const pluginTypings = JSON.parse(
+    fs.readFileSync(path.join(__dirname, "pluginTypings.json"), "utf-8")
   );
+  if (pluginTypings[plugin]) {
+    childProcess.execSync(`yarn add -D @types/${plugin}`);
+  }
   success &&
     success({
       data: `更新插件${plugin}成功`

@@ -14,7 +14,6 @@ function Configuration({ api }) {
       })
       .then(({ data }) => {
         const { widget } = data || {};
-        console.log(widget, "---- widget");
         const { author, preference, version, id, name, description } =
           widget || {};
         const allowIntent =
@@ -42,7 +41,6 @@ function Configuration({ api }) {
         }
 
         prefHash["FullScreen"] = prefHash["FullScreen"] === "true";
-        console.log(prefHash, "---- pref ---", preference);
         prefRef.current = prefHash;
         initialValue["preference.Orientation"] =
           prefHash["Orientation"] || "default";

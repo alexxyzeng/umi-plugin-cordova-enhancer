@@ -128,8 +128,6 @@ function writeInfos(widget, options) {
       });
   }
   if (prefs) {
-    console.log(prefs, "---- prefs");
-    console.log(preference, "---- preference");
     let prefList = [];
     for (let prefKey in prefs) {
       prefList.push({
