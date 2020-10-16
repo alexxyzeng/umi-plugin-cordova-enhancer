@@ -1792,6 +1792,11 @@
   resolved "https://registry.npmjs.org/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/cordova@^0.0.34":
+  version "0.0.34"
+  resolved "https://registry.npmjs.org/@types/cordova/-/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
+  integrity sha1-6nrd907Ow9dimCegw54smt3HPQQ=
+
 "@types/debug@^4.1.5":
   version "4.1.5"
   resolved "https://registry.npmjs.org/@types/debug/-/debug-4.1.5.tgz#b14efa8852b7768d898906613c23f688713e02cd"
@@ -4731,8 +4736,8 @@ cordova-serve@^4.0.0:
 
 cordova@^10.0.0:
   version "10.0.0"
-  resolved "https://registry.npm.taobao.org/cordova/download/cordova-10.0.0.tgz#8563934f5207896efb7ea517f43065a3d0a4eaf1"
-  integrity sha1-hWOTT1IHiW77fqUX9DBlo9Ck6vE=
+  resolved "https://registry.npmjs.org/cordova/-/cordova-10.0.0.tgz#8563934f5207896efb7ea517f43065a3d0a4eaf1"
+  integrity sha512-00wMcj3X9ILhKtvRG2iEwO2qly4B+vgXFhH4WhVepWg2UVbD1opl1q9jSZ+j2AaI/vsBWW8e6M2M5FAHasnuWw==
   dependencies:
     configstore "^5.0.1"
     cordova-common "^4.0.2"

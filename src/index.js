@@ -137,7 +137,7 @@ export default function(api, options) {
 }
 
 function initCordova(options, success) {
-  updateConfig(options);
+  writeCordovaConfig(options);
   addCordova();
   updateGitignore();
   updatePackageJson(options);
@@ -217,7 +217,8 @@ function updateCordovaPlugin(args, success, failure) {
     fs.readFileSync(path.join(__dirname, "pluginTypings.json"), "utf-8")
   );
   if (pluginTypings[plugin]) {
-    childProcess.execSync(`yarn add -D @types/${plugin}`);
+    const devAction = action === "add" ? "add -D" : "remove";
+    childProcess.execSync(`yarn ${devAction} @types/${plugin}`);
   }
   success &&
     success({
@@ -327,7 +328,19 @@ function getCordovaConfig(options, success, failure) {
     });
 }
 
+function writeCordovaConfig(options, success, failure) {
+  parseConfig(options);
+  success &&
+    success({
+      data: "写入配置成功"
+    });
+}
+
 function updateCordovaConfig(options, success, failure, params) {
   const finalOptions = { ...options, config: params };
   updateConfig(finalOptions);
+  success &&
+    success({
+      data: "更新配置成功"
+    });
 }

@@ -219,6 +219,11 @@
   resolved "https://registry.npmjs.org/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
+"@types/cordova-sqlite-storage@^1.5.4":
+  version "1.5.4"
+  resolved "https://registry.npmjs.org/@types/cordova-sqlite-storage/-/cordova-sqlite-storage-1.5.4.tgz#1c6aca7a9e58b63fd7a6d5191d59a4cb93e1d842"
+  integrity sha512-/ScqZRyagiqL5uAdN3Pd4oZoFxu8ZslDcQPdPAwRPn28S8cnZlNimVGmsn5o3gh3CzQa1+MmZPgWVDK2u+2sIg==
+
 "@types/cordova@^0.0.34":
   version "0.0.34"
   resolved "https://registry.npm.taobao.org/@types/cordova/download/@types/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
@@ -1719,9 +1724,21 @@ cordova-serve@^4.0.0:
     open "^7.0.3"
     which "^2.0.2"
 
+cordova-sqlite-storage-dependencies@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/cordova-sqlite-storage-dependencies/-/cordova-sqlite-storage-dependencies-3.0.0.tgz#5f9c9fd6342fd4135a3375cc3d5579ffd0318e25"
+  integrity sha512-A7gV5lQZc0oPrJ/a+lsZmMZr7vYou4MXyQFOY+b/dwuCMsagLT0EsL7oY54tqzpvjtzLfh0aZGGm9i8DMAIFSA==
+
+cordova-sqlite-storage@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-5.1.0.tgz#ded50473525ad178fd623c3881a60662b79a3712"
+  integrity sha512-UmHe9yQiYblDBToh3z91WHuD6ZgmCm3VX+1QFseYQs4WVQ3+ndj22qyGby/NV0uyCgok91gB1obLjLM+9vYJEw==
+  dependencies:
+    cordova-sqlite-storage-dependencies "3.0.0"
+
 cordova@^10.0.0:
   version "10.0.0"
-  resolved "https://registry.npm.taobao.org/cordova/download/cordova-10.0.0.tgz#8563934f5207896efb7ea517f43065a3d0a4eaf1"
+  resolved "https://registry.npm.taobao.org/cordova/download/cordova-10.0.0.tgz?cache=0&sync_timestamp=1602635951759&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcordova%2Fdownload%2Fcordova-10.0.0.tgz#8563934f5207896efb7ea517f43065a3d0a4eaf1"
   integrity sha1-hWOTT1IHiW77fqUX9DBlo9Ck6vE=
   dependencies:
     configstore "^5.0.1"

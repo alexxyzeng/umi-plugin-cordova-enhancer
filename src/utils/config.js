@@ -6,6 +6,7 @@ import { parseIconsAndSplashes } from "./parseAssets";
 import { parsePermissions } from "./parsePermissions";
 
 function parseConfig(options, baseConfigPath) {
+  console.log(options, "--- options");
   baseConfigPath =
     baseConfigPath || path.resolve(__dirname, "..", "config-base.xml");
   const baseXml = fs.readFileSync(baseConfigPath, "utf-8");
@@ -41,7 +42,8 @@ function writeIconsAndSplashes(widget, { resPath }) {
   };
 }
 
-function writePermissions(widget, { permissions }) {
+function writePermissions(widget, { config }) {
+  const { permissions } = config;
   const permissionList = parsePermissions(permissions);
   const { platform, ...restConfig } = widget;
   const platformIOS = platform[1];
@@ -142,6 +144,9 @@ function writeInfos(widget, options) {
 
 function getConfig(options) {
   const { configPath } = options;
+  if (!fs.existsSync(configPath)) {
+    fs.writeFileSync(configPath, "");
+  }
   const configXml = fs.readFileSync(configPath, "utf-8");
   const widget = JSON.parse(parser.toJson(configXml, { reversible: true }));
   return widget;
@@ -150,7 +155,7 @@ function getConfig(options) {
 function updateConfig(options) {
   const { config, configPath } = options;
   const { widget } = getConfig(options);
-  const finalConfig = writeInfos(widget, config);
+  const finalConfig = writeInfos(widget || {}, config);
   fs.writeFileSync(configPath, format(parser.toXml({ widget: finalConfig })));
 }
 

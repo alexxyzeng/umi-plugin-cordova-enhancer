@@ -18,9 +18,20 @@
     "start:mini": "cross-env UMI_UI=1 APP_ROOT=example umi dev",
     "start": "cross-env CURRENT_PROJECT=example umi ui",
     "build": "father-build && cp config-base.xml lib/config-base.xml",
-    "prepublishOnly": "npm run build && np --no-cleanup --yolo --no-publish"
+    "prepublishOnly": "npm run build && np --no-cleanup --yolo --no-publish",
+    "init:cordova": "umi cordova --init",
+    "init:android": "umi cordova add android --platform",
+    "prepare:cordova": "umi cordova --prepare",
+    "mock:android": "umi build && umi cordova emulate android",
+    "run:android": "umi build && umi cordova run android",
+    "release:android": "umi build && umi cordova android --release",
+    "init:ios": "umi cordova add ios --platform",
+    "mock:ios": "umi build && cordova build ios && open -a Xcode ./platforms/ios/fmapp.xcworkspace",
+    "start:ui": "umi ui",
+    "ci:ios": "cd platforms/ios && fastlane init"
   },
   "devDependencies": {
+    "@types/cordova": "^0.0.34",
     "antd": "^4.0.0-alpha.0",
     "cross-env": "^6.0.3",
     "father-build": "^1.8.0",
@@ -37,6 +48,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^4.1.0",
+    "cordova": "^10.0.0",
     "xml-formatter": "^2.3.0",
     "xml2json": "^0.12.0"
   }

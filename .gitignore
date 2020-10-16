@@ -7,3 +7,7 @@
 /example/pages/.umi-production
 /lib
 /dist
+
+plugins
+platforms
+www
