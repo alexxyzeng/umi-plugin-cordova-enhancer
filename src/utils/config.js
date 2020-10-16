@@ -6,7 +6,6 @@ import { parseIconsAndSplashes } from "./parseAssets";
 import { parsePermissions } from "./parsePermissions";
 
 function parseConfig(options, baseConfigPath) {
-  console.log(options, "--- options");
   baseConfigPath =
     baseConfigPath || path.resolve(__dirname, "..", "config-base.xml");
   const baseXml = fs.readFileSync(baseConfigPath, "utf-8");
@@ -80,7 +79,7 @@ function writePermissions(widget, { config }) {
   };
 }
 
-function writeInfos(widget, options) {
+function writeInfos(widget, { config: options }) {
   const finalWidget = { ...widget };
   const {
     locale = "zh_CN",
@@ -133,7 +132,7 @@ function writeInfos(widget, options) {
     let prefList = [];
     for (let prefKey in prefs) {
       prefList.push({
-        key: prefKey,
+        name: prefKey,
         value: prefs[prefKey]
       });
     }

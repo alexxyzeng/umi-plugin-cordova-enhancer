@@ -219,11 +219,6 @@
   resolved "https://registry.npmjs.org/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
 
-"@types/cordova-sqlite-storage@^1.5.4":
-  version "1.5.4"
-  resolved "https://registry.npmjs.org/@types/cordova-sqlite-storage/-/cordova-sqlite-storage-1.5.4.tgz#1c6aca7a9e58b63fd7a6d5191d59a4cb93e1d842"
-  integrity sha512-/ScqZRyagiqL5uAdN3Pd4oZoFxu8ZslDcQPdPAwRPn28S8cnZlNimVGmsn5o3gh3CzQa1+MmZPgWVDK2u+2sIg==
-
 "@types/cordova@^0.0.34":
   version "0.0.34"
   resolved "https://registry.npm.taobao.org/@types/cordova/download/@types/cordova-0.0.34.tgz#ea7addf74ecec3d7629827a0c39e2c9addc73d04"
@@ -495,10 +490,20 @@ ajv-keywords@^3.1.0, ajv-keywords@^3.4.1:
   resolved "https://registry.npmjs.org/ajv-keywords/-/ajv-keywords-3.5.2.tgz#31f29da5ab6e00d1c2d329acf7b5929614d5014d"
   integrity sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==
 
-ajv@^6.1.0, ajv@^6.10.2, ajv@^6.12.3:
+ajv@^6.1.0, ajv@^6.10.2:
   version "6.12.5"
   resolved "https://registry.npmjs.org/ajv/-/ajv-6.12.5.tgz#19b0e8bae8f476e5ba666300387775fb1a00a4da"
   integrity sha512-lRF8RORchjpKG50/WFf8xmg7sgCLFiYNNnqdKflk63whMQcWR5ngGjiSXkL9bjxy6B2npOK2HSMN49jEBMSkag==
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    fast-json-stable-stringify "^2.0.0"
+    json-schema-traverse "^0.4.1"
+    uri-js "^4.2.2"
+
+ajv@^6.12.3:
+  version "6.12.6"
+  resolved "https://registry.npmjs.org/ajv/-/ajv-6.12.6.tgz#baf5a62e802b07d977034586f8c3baf5adf26df4"
+  integrity sha512-j3fVLgvTo527anyYyJOGTYJbG+vnnQYvE0m5mmkc1TK+nxAppkCLMIL0aZ4dblVCNoGShhm+kzE4ZUykBoMg4g==
   dependencies:
     fast-deep-equal "^3.1.1"
     fast-json-stable-stringify "^2.0.0"
@@ -1703,16 +1708,6 @@ cordova-lib@^10.0.0:
     stringify-package "^1.0.1"
     write-file-atomic "^3.0.3"
 
-cordova-plugin-device@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.npmjs.org/cordova-plugin-device/-/cordova-plugin-device-2.0.3.tgz#c2b41b7efd0455dd097f89356d85bfdd5dadeb0f"
-  integrity sha512-Jb3V72btxf3XHpkPQsGdyc8N6tVBYn1vsxSFj43fIz9vonJDUThYPCJJHqk6PX6N4dJw6I4FjxkpfCR4LDYMlw==
-
-cordova-plugin-file@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.npmjs.org/cordova-plugin-file/-/cordova-plugin-file-6.0.2.tgz#f3911479f8357e9aacb5576674f8d95b31a1fb20"
-  integrity sha512-m7cughw327CjONN/qjzsTpSesLaeybksQh420/gRuSXJX5Zt9NfgsSbqqKDon6jnQ9Mm7h7imgyO2uJ34XMBtA==
-
 cordova-serve@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/cordova-serve/-/cordova-serve-4.0.0.tgz#7d0dc2a3c15f4ed17a467b97f0a37b9eb00b2964"
@@ -1724,21 +1719,9 @@ cordova-serve@^4.0.0:
     open "^7.0.3"
     which "^2.0.2"
 
-cordova-sqlite-storage-dependencies@3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/cordova-sqlite-storage-dependencies/-/cordova-sqlite-storage-dependencies-3.0.0.tgz#5f9c9fd6342fd4135a3375cc3d5579ffd0318e25"
-  integrity sha512-A7gV5lQZc0oPrJ/a+lsZmMZr7vYou4MXyQFOY+b/dwuCMsagLT0EsL7oY54tqzpvjtzLfh0aZGGm9i8DMAIFSA==
-
-cordova-sqlite-storage@^5.1.0:
-  version "5.1.0"
-  resolved "https://registry.npmjs.org/cordova-sqlite-storage/-/cordova-sqlite-storage-5.1.0.tgz#ded50473525ad178fd623c3881a60662b79a3712"
-  integrity sha512-UmHe9yQiYblDBToh3z91WHuD6ZgmCm3VX+1QFseYQs4WVQ3+ndj22qyGby/NV0uyCgok91gB1obLjLM+9vYJEw==
-  dependencies:
-    cordova-sqlite-storage-dependencies "3.0.0"
-
 cordova@^10.0.0:
   version "10.0.0"
-  resolved "https://registry.npm.taobao.org/cordova/download/cordova-10.0.0.tgz?cache=0&sync_timestamp=1602635951759&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fcordova%2Fdownload%2Fcordova-10.0.0.tgz#8563934f5207896efb7ea517f43065a3d0a4eaf1"
+  resolved "https://registry.npm.taobao.org/cordova/download/cordova-10.0.0.tgz#8563934f5207896efb7ea517f43065a3d0a4eaf1"
   integrity sha1-hWOTT1IHiW77fqUX9DBlo9Ck6vE=
   dependencies:
     configstore "^5.0.1"
@@ -3022,10 +3005,10 @@ hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
   resolved "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.8.8.tgz#7539bd4bc1e0e0a895815a2e0262420b12858488"
   integrity sha512-f/wzC2QaWBs7t9IYqB4T3sR1xviIViXJRJTWBlx2Gf3g0Xi5vI7Yy4koXQ1c9OYDGHN9sBy1DQ2AB8fqZBWhUg==
 
-hosted-git-info@^3.0.2:
-  version "3.0.5"
-  resolved "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-3.0.5.tgz#bea87905ef7317442e8df3087faa3c842397df03"
-  integrity sha512-i4dpK6xj9BIpVOTboXIlKG9+8HMKggcrMX7WA24xZtKwX0TPelq/rbaS5rCKeNX8sJXZJGdSxpnEGtta+wismQ==
+hosted-git-info@^3.0.6:
+  version "3.0.7"
+  resolved "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-3.0.7.tgz#a30727385ea85acfcee94e0aad9e368c792e036c"
+  integrity sha512-fWqc0IcuXs+BmE9orLDyVykAG9GJtGLGuZAAqgcckPgv5xad4AcXGIv8galtQvlwutxSlaMcdw7BUtq2EIvqCQ==
   dependencies:
     lru-cache "^6.0.0"
 
@@ -3592,11 +3575,6 @@ joi@^13.1.2:
     hoek "5.x.x"
     isemail "3.x.x"
     topo "3.x.x"
-
-jpush-phonegap-plugin@^3.7.6:
-  version "3.7.6"
-  resolved "https://registry.npm.taobao.org/jpush-phonegap-plugin/download/jpush-phonegap-plugin-3.7.6.tgz#a5fdc238f39c2e6a95fb457db758a84cc7651225"
-  integrity sha1-pf3COPOcLmqV+0V9t1ioTMdlEiU=
 
 js-base64@^2.1.9:
   version "2.6.4"
@@ -4325,11 +4303,11 @@ npm-normalize-package-bin@^1.0.0:
     validate-npm-package-name "^3.0.0"
 
 npm-package-arg@^8.0.1:
-  version "8.0.1"
-  resolved "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-8.0.1.tgz#9d76f8d7667b2373ffda60bb801a27ef71e3e270"
-  integrity sha512-/h5Fm6a/exByzFSTm7jAyHbgOqErl9qSNJDQF32Si/ZzgwT2TERVxRxn3Jurw1wflgyVVAxnFR4fRHPM7y1ClQ==
+  version "8.1.0"
+  resolved "https://registry.npmjs.org/npm-package-arg/-/npm-package-arg-8.1.0.tgz#b5f6319418c3246a1c38e1a8fbaa06231bc5308f"
+  integrity sha512-/ep6QDxBkm9HvOhOg0heitSd7JHA1U7y1qhhlRlteYYAi9Pdb/ZV7FW5aHpkrpM8+P+4p/jjR8zCyKPBMBjSig==
   dependencies:
-    hosted-git-info "^3.0.2"
+    hosted-git-info "^3.0.6"
     semver "^7.0.0"
     validate-npm-package-name "^3.0.0"
 
@@ -6590,9 +6568,9 @@ symbol-observable@^1.2.0:
   integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 systeminformation@^4.26.10:
-  version "4.27.5"
-  resolved "https://registry.npmjs.org/systeminformation/-/systeminformation-4.27.5.tgz#af304fbfd0e7ba51c87512333691b58b4ad90e43"
-  integrity sha512-EysogxKqREk54ZYDEFcsCODv8GymKZcyiSfegYit8dKhPjzuQr+KX4GFHjssWjYrWFEIM2bYNsFrZX5eufeAXg==
+  version "4.27.10"
+  resolved "https://registry.npmjs.org/systeminformation/-/systeminformation-4.27.10.tgz#d15181c2872c46de21607d302bd161659a78b148"
+  integrity sha512-qXuJaa+3A1bLkFNr/rn3H9Uw8UGodSbq+1QjxDbXua9iexfw4UIdAZZTyu9kE5OkXG1Lt6u0z4aZfxYRVL68EA==
 
 tail@^0.4.0:
   version "0.4.0"

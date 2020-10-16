@@ -8,7 +8,6 @@ const permissionsIOS = {
   microphone: { type: "edit-config", parent: "NSMicrophoneUsageDescription" }
 };
 function parsePermissions(options) {
-  console.log(options, "---- parsePermissions");
   if (!options) {
     return [];
   }

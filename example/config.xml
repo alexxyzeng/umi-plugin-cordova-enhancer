@@ -1,12 +1,12 @@
-<widget defaultlocale="zh_CN" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" defaultLocale="zh_CN" id="com.dfocus.datacenter" version="1.0.1">
+<widget defaultlocale="zh_CN" id="com.dfocus.fmapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" defaultLocale="zh_CN">
     <name>
-        数据中心111
+        数据中心
     </name>
     <description>
-        fffffff
+        fmapp
     </description>
-    <author email="dev@dfocuspace.com" href="https://www.dfocuspace.com/">
-        dfocus
+    <author email="xxx@df.com" href="#">
+        xxx
     </author>
     <content src="index.html"></content>
     <access origin="*"></access>
@@ -17,9 +17,12 @@
     <allow-intent href="sms:*"></allow-intent>
     <allow-intent href="mailto:*"></allow-intent>
     <allow-intent href="geo:*"></allow-intent>
-    <preference key="Orientation" value="landscape"></preference>
-    <preference key="target-device" value="universal"></preference>
-    <preference key="FullScreen" value="true"></preference>
+    <preference name="target-device" value="handset"></preference>
+    <preference name="StatusBarOverlaysWebView" value="true"></preference>
+    <preference name="StatusBarStyle" value="default"></preference>
+    <preference name="SwiftVersion" value="5"></preference>
+    <preference name="SplashScreenDelay" value="3000"></preference>
+    <preference name="Orientation" value="portrait"></preference>
     <platform name="android">
         <allow-intent href="market:*"></allow-intent>
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">

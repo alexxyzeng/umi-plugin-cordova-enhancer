@@ -45,14 +45,14 @@ const commands = {
   getCordovaInfo: (_, success, failure) => {
     getCordovaDetails(_, success, failure);
   },
-  debugIOS: (_, success, failure) => {
-    runAppInUI("mock:ios", success, failure);
+  debugIOS: (_, success, failure, api) => {
+    runAppInUI("mock:ios", success, failure, api);
   },
-  debugAndroid: (_, success, failure) => {
-    runAppInUI("mock:android", success, failure);
+  debugAndroid: (_, success, failure, api) => {
+    runAppInUI("mock:android", success, failure, api);
   },
-  runRealAndroid: (_, success, failure) => {
-    runAppInUI("run:android", success, failure);
+  runRealAndroid: (_, success, failure, api) => {
+    runAppInUI("run:android", success, failure, api);
   },
   releaseIOS: (_, success, failure) => {
     failure({
@@ -65,7 +65,7 @@ const commands = {
   getCordovaConfig: (options, success, failure) => {
     getCordovaConfig(options, success, failure);
   },
-  updateCordovaConfig: (options, success, failure, params) => {
+  updateCordovaConfig: (options, success, failure, _, params) => {
     updateCordovaConfig(options, success, failure, params);
   }
 };
@@ -79,7 +79,6 @@ export default function(api, options) {
   api.addUIPlugin(require.resolve("../dist/index.umd"));
   api.onUISocket(({ action, failure, success }) => {
     const { type, payload } = action;
-    console.log(payload, "---- params");
     if (!type.startsWith(TAG)) {
       failure({
         message: "输入的指令不正确"
@@ -93,7 +92,7 @@ export default function(api, options) {
         message: "未找到对应的指令"
       });
     }
-    command(options, success, failure, payload);
+    command(options, success, failure, api, payload);
   });
 
   api.modifyDefaultConfig(config => {
@@ -132,7 +131,7 @@ export default function(api, options) {
     if (args.plugin) {
       return updateCordovaPlugin(args);
     }
-    return runApp(args);
+    return runApp(args, api);
   });
 }
 
@@ -176,9 +175,17 @@ function updateCordovaPlatform(args, success, failure) {
     return;
   }
   try {
-    childProcess.execSync(`cordova platform ${action} ${platform}`);
+    childProcess.execSync(`cordova platform ${action} ${platform}`, {
+      stdio: "inherit"
+    });
     console.log(
-      "The platform " + chalk.yellow(platform) + " is successfully added"
+      "The platform " +
+        chalk.yellow(platform) +
+        " is successfully " +
+        action ===
+        "add"
+        ? "added"
+        : "removed"
     );
     success &&
       success({
@@ -212,13 +219,15 @@ function updateCordovaPlugin(args, success, failure) {
   }
   addPluginCommand += " -- save";
   // TODO: 如果有对应的types, 同时下载
-  childProcess.execSync(`${addPluginCommand}`);
+  childProcess.execSync(`${addPluginCommand}`, { stdio: "inherit" });
   const pluginTypings = JSON.parse(
     fs.readFileSync(path.join(__dirname, "pluginTypings.json"), "utf-8")
   );
   if (pluginTypings[plugin]) {
     const devAction = action === "add" ? "add -D" : "remove";
-    childProcess.execSync(`yarn ${devAction} @types/${plugin}`);
+    childProcess.execSync(`yarn ${devAction} @types/${plugin}`, {
+      stdio: "inherit"
+    });
   }
   success &&
     success({
@@ -227,23 +236,27 @@ function updateCordovaPlugin(args, success, failure) {
 }
 
 function prepareCorodva(args, success, failure) {
-  childProcess.execSync(`cordova prepare --color`);
+  childProcess.execSync(`cordova prepare --color`, { stdio: "inherit" });
   success &&
     success({
       data: "恢复Cordova信息成功"
     });
 }
 
-function runApp(args) {
+function runApp(args, api) {
   const [action, platform] = args._ || [];
   if (!action || !platform) {
     return;
   }
-  childProcess.execSync(`cordova ${action} ${platform}`);
+  api.log.pending(`Running cordova ${action} ${platform}`);
+  childProcess.execSync(`cordova ${action} ${platform}`, { stdio: "inherit" });
+  api.log.success(`Run cordova ${action} ${platform} success`);
 }
 
-function runAppInUI(args, success, failure) {
-  childProcess.execSync(`yarn ${args}`);
+function runAppInUI(args, success, failure, api) {
+  api.log.pending(`Running yarn ${args}`);
+  childProcess.execSync(`yarn ${args}`, { stdio: "inherit" });
+  api.log.success(`Run yarn ${args} success!`);
   success &&
     success({
       data: "启动成功"
@@ -262,8 +275,12 @@ function releaseApp(args, options) {
   }
 }
 
-function releaseAndroidApp(options, success, failure) {
-  childProcess.execSync(`cordova build android --release`);
+function releaseAndroidApp(options, success, failure, api) {
+  api.log.pending(`Running release android app`);
+  childProcess.execSync(`cordova build android --release`, {
+    stdio: "inherit"
+  });
+  api.log.success(`Run release android app finished`);
   success &&
     success({
       data: "Release成功"
@@ -277,12 +294,16 @@ function releaseAndroidApp(options, success, failure) {
   }
   childProcess.execSync(
     `cp platforms/android/app/build/outputs/apk/release/app-release*.apk ${apkOutputPath}/${apkOutputName}.apk` +
-      ` && cd ${apkOutputPath} && open .`
+      ` && cd ${apkOutputPath} && open .`,
+    { stdio: "inherit" }
   );
 }
 
 function configCI_iOS(_, success, failure) {
-  childProcess.spawn("fastlane init", { cwd: "platforms/ios" });
+  childProcess.spawn("fastlane init", {
+    cwd: "platforms/ios",
+    stdio: "inherit"
+  });
 }
 
 function releaseiOSApp(_, success, failure) {
@@ -297,7 +318,9 @@ function releaseiOSApp(_, success, failure) {
       })
     );
   }
-  childProcess.execSync(`cordova build ios && fastlane beta`);
+  childProcess.execSync(`cordova build ios && fastlane beta`, {
+    stdio: "inherit"
+  });
 }
 
 function getCordovaDetails(_, success, failure) {
