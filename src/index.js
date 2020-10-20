@@ -59,8 +59,8 @@ const commands = {
       message: "当前功能未实现"
     });
   },
-  releaseAndroid: (options, success, failure) => {
-    releaseAndroidApp(options, success, failure);
+  releaseAndroid: (options, success, failure, api) => {
+    releaseAndroidApp(options, success, failure, api);
   },
   getCordovaConfig: (options, success, failure) => {
     getCordovaConfig(options, success, failure);
@@ -126,7 +126,7 @@ export default function(api, options) {
       return updateCordovaPlatform(args);
     }
     if (args.release) {
-      return releaseApp(args, options);
+      return releaseApp(args, options, undefined, undefined, api);
     }
     if (args.plugin) {
       return updateCordovaPlugin(args);
@@ -263,15 +263,15 @@ function runAppInUI(args, success, failure, api) {
     });
 }
 
-function releaseApp(args, options) {
+function releaseApp(args, options, success, failure, api) {
   const [platform] = args._ || [];
   if (!platform) {
     return;
   }
   if (platform === "android") {
-    return releaseAndroidApp(options);
+    return releaseAndroidApp(options, success, failure, api);
   } else if (platform === "ios") {
-    releaseiOSApp(options);
+    releaseiOSApp(options, success, failure, api);
   }
 }
 

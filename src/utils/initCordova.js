@@ -45,11 +45,13 @@ function updatePackageJson(options) {
   const cordovaScripts = [
     ["init:cordova", "umi cordova --init"],
     ["init:android", "umi cordova add android --platform"],
+    ["remove:android", "umi cordova rm android --platform"],
     ["prepare:cordova", "umi cordova --prepare"],
     ["mock:android", "umi build && umi cordova emulate android"],
     ["run:android", "umi build && umi cordova run android"],
     ["release:android", "umi build && umi cordova android --release"],
     ["init:ios", "umi cordova add ios --platform"],
+    ["remove:ios", "umi cordova remove ios --platform"],
     [
       "mock:ios",
       `umi build && cordova build ios && open -a Xcode ./platforms/ios/${appName}.xcworkspace`
